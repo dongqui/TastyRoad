@@ -1,0 +1,39 @@
+{
+  "name": "im07-tasty-road-server",
+  "version": "1.0.0",
+  "description": "tasty road in 성수",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestates/im07-tasty-road-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codestates/im07-tasty-road-server/issues"
+  },
+  "homepage": "https://github.com/codestates/im07-tasty-road-server#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.2.5",
+    "node": "^10.7.0",
+    "nodemon": "^1.18.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-slack": "0.0.7",
+    "request": "^2.87.0",
+    "underscore": "^1.9.1"
+  }
+}

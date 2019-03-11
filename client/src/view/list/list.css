@@ -1,0 +1,23 @@
+.active_list {
+    border: 5px solid #151719;
+}
+
+.con {
+    z-index: 3;
+}
+
+.first {
+    background-color: gold;
+}
+
+.second {
+    background-color: #e0e0e0;
+}
+
+.defaultBack {
+    background-color: #fae7df;
+}
+
+.hell {
+    background-color: white;
+}

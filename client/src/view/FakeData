@@ -1,0 +1,67 @@
+state = {
+    isLogin: false,
+    selectedId: -1,
+
+    restaurants :[
+      {
+        name: "이북집",
+        map: {
+          latitude: 37.544714,
+          longitude: 127.049489,
+        },
+        rating: 4.29,
+        reviews: [1, 2, 3]
+      },
+      {
+        name: "순남시래기",
+        map: {
+          latitude: 37.542930,
+          longitude: 127.056849
+        },
+        rating: 3.14,
+        reviews: [4, 5, ]
+      },
+      {
+        name: "놀란치킨",
+        map: {
+          latitude: 37.545159,
+          longitude: 127.055075,
+        },
+        rating: 4.8,
+        reviews: [4, 5, ]
+      },
+      {
+        name: "봉쥬르",
+        map: {
+          latitude: 37.545926,
+          longitude: 127.049626
+        },
+        rating: 2.2,
+        reviews: [4, 5, ]
+      },
+      {
+        name: "닭칼",
+        map: {
+          latitude: 37.545521,
+          longitude: 127.051851
+        },
+        rating: 3.3,
+        reviews: [4, 5, ]
+      }
+    ],
+
+    reviews: [
+      {
+        id: 1,
+        userName: 'dong',
+        content: 'good',
+        rating: '3'
+      },
+      {
+        id: 2,
+        userName: 'kim',
+        content: 'z',
+        rating: '2'
+      }
+    ]
+  };

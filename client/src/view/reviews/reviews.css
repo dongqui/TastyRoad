@@ -1,0 +1,19 @@
+#reviews_container {
+    position: fixed;
+    margin: 0;
+    top: 30%;
+    left: -20%;
+    width: 20%;
+    max-height: 68%;
+    z-index: 5;
+    border: solid 3px #151719;
+    overflow: scroll;
+}
+#reviews_container.active_reviews {
+    left: 1%;
+    transition: all 500ms linear;
+}
+
+.he{
+    font-weight: normal;
+}

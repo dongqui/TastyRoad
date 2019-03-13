@@ -4,45 +4,31 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const port = process.env.PORT || 3001;
 const app = express();
-const mwRouting = require('./routes/mw_routing');
+const restaurantRoutes = require('./routes/restaurantHandler');
+const authRoutes = require('./routes/authHandler');
+const reviewRoutes = require('./routes/reviewHandler');
 const cors = require('cors');
 const session = require('express-session');
 
-//CORS allowance
 app.use(cors());
-
-
-//static files
 app.use(express.static(__dirname + '/client/build'));
-
-//router folders
-const authRoutes = require('./routes/auth-routes');
-
-//body parsing
 app.use(bodyParser.json());
-
-//body-parser
 app.use(require('body-parser'). urlencoded({ extended: true}));
-
-//use the session middleware
 app.use(session({
     secret: 'i am secret',
     resave: true,
     saveUninitialized: false
 }));
 
-//auth routes
 app.use('/auth', authRoutes);
-
-//restuarants and reviews routes
-app.use('/api', mwRouting);
+app.use('/restaurant', restaurantRoutes);
+app.use('/review', reviewRoutes);
 
 //handling all requests
 // app.get('*', (req, res) => {
 //     res.sendFile(__dirname + '/client/im07-tasty-road-client/build/index.html')
 //    });
 
-//server and mongodb connection
 app.listen(port, () => {
    console.log(`Express is running on port ${port}`)
 });

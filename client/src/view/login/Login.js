@@ -25,7 +25,7 @@ class Login extends React.Component {
           </div>
           <p className="loginSubtitle">for codestates</p>
         </div>
-        <div className='slackButtonCon' style={{cursor: 'pointer'}} onClick={function(){window.location='https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.407271306386'}}>
+        <div className='slackButtonCon' style={{cursor: 'pointer'}} onClick={function(){window.location='https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.408791625351'}}>
           <div style={{width: '15%', height: '88%', backgroundColor: 'white'}}>
             <img style={{width: '100%', height: '100%'}} src="https://regmedia.co.uk/2016/01/12/slack.jpg?x=1200&y=794"/>
           </div>

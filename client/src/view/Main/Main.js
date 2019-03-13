@@ -21,7 +21,6 @@ class Main extends Component {
     axios.get('/api/restaurants')
       .then( response => {
         if (response.data[0]) {
-          console.log(response.data, '@@@@@@@@@@@@@');
           this.setState({restaurants: response.data});
         }
         this.loadingRef.current.style.zIndex = -1;

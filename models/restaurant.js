@@ -15,6 +15,3 @@ const restaurants = new Schema({
 
 
 module.exports = mongoose.model('Restaurant', restaurants);
-
-//server side index 공부 --시간 복잡도
-//like hash

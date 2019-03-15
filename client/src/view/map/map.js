@@ -30,7 +30,6 @@ class Map extends Component {
 
     const markerImage = this.makeMarkerImage('marker.png', false);
     this.props.restaurants.forEach((restaurant, idx) => {
-      console.log(that.markers.length);
       const markerPosition = new window.daum.maps.LatLng(restaurant.map.latitude, restaurant.map.longitude);
       let marker =new window.daum.maps.Marker({
         position: markerPosition,

@@ -18,7 +18,7 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    axios.get('/api/restaurants')
+    axios.get('http://localhost:3001/restaurant')
       .then( response => {
         if (response.data[0]) {
           this.setState({restaurants: response.data});
@@ -31,8 +31,7 @@ class Main extends Component {
   setFilter = e => {
     this.loadingRef.current.style.zIndex = 100;
     const filter = e;
-    console.log(filter);
-    axios.get('/api/restaurants/' + filter)
+    axios.get('/restaurant/' + filter)
       .then(result => {
         if (result.data[0]) {
           this.setState({restaurants: result.data, selectedId: -1});
@@ -56,8 +55,6 @@ class Main extends Component {
 
   renderReviews() {
     if (this.state.selectedId !== -1 && this.state.restaurants.length) {
-      console.log(this.state.selectedId, 'selectedIddddddddd');
-      console.log(this.state.reviews, 'reeeeeviiieeeewwsss');
       return <Reviews loadingRef={this.loadingRef}
         user={this.props.user} reviews={this.state.reviews} getMoreReviews={this.getMoreReviews} restaurant={this.state.restaurants[this.state.selectedId]}/>
     }

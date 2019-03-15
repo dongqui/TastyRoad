@@ -7,6 +7,19 @@
     z-index: 3;
 }
 
+#detailed h4 {
+    color: white;
+    text-align: center;
+    margin: 10px;
+}
+
+#detailed p {
+    color: white;
+    text-align: center;
+    letter-spacing: 2.5px;
+    margin: 20px;
+}
+
 #detailed.active_info {
     right: 26%;
     transition: all 400ms linear;

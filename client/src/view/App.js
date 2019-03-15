@@ -9,25 +9,25 @@ class App extends React.Component {
 
   state = {};
 
-  componentDidMount() {
-    axios.get('http://localhost:3001/auth/slack')
-      .then(result => {
-        this.setState({user: result.data})
-      })
-      .catch(err => console.log('request user err', err))
-  }
+  // componentDidMount() {
+  //   axios.get('http://localhost:3001/auth/slack')
+  //     .then(result => {
+  //       this.setState({user: result.data})
+  //     })
+  //     .catch(err => console.log('request user err', err))
+  // }
 
   render() {
     return (
       <Router>
         <switch>
-            {/*<Main user={this.state.user}/>*/}
+            <Main/>
           {/*<Route path='/' exact render={() => (*/}
             {/*this.state.user ? (<Main user={this.state.user}/> ) : (<Redirect to='/login' />)*/}
           {/*)} />*/}
-          <Route path='/login' exact render={() => (
-            this.state.user ? (<Redirect to='/' />) : (<Login />)
-          )} />
+          {/*<Route path='/login' exact render={() => (*/}
+            {/*this.state.user ? (<Redirect to='/' />) : (<Login />)*/}
+          {/*)} />*/}
         </switch>
       </Router>
     )

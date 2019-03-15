@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useRef, useEffect, useState } from 'react';
 import Review from './Review';
 import './reviews.css';
 import { Button,Modal,Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
+import isActive from '../../helper/toggleClass';
 
+
+const Reviews_ = (props) => {
+  const reviewsContainerRef = useRef(null);
+  const [reviews, setReviews] = useState(props.restaurant.reviews);
+  const [restaurantId, setRestaurantId] = useState(props.restaurant._id);
+  useEffect(isActive(reviewsContainerRef, 'active_reviews'), [restaurantId]);
+
+};
 class Reviews extends React.Component{
   
 
@@ -16,7 +25,6 @@ class Reviews extends React.Component{
 
   isActive = () => {
     let elm = this.ref_container.current;
-    console.log(elm);
     if (elm.classList.contains('active_reviews')) {
       elm.classList.remove('active_reviews');
       void elm.offsetWidth;
@@ -42,12 +50,10 @@ class Reviews extends React.Component{
     const user = this.props.user;
     if (this.props.reviews) {
       return this.props.reviews.map(function (review, idx) {
-        console.log(review);
         return <Review review={review} user={user}/>
       })
     } else {
       return this.props.restaurant.reviews.map(function (review, idx) {
-        console.log(review);
         return <Review review={review} user={user}/>
       })
     }
@@ -76,9 +82,8 @@ class Reviews extends React.Component{
   };
 
   moreReviewsOnclick = () => {
-    console.log('!!!!!!!!!!!!!!');
     this.props.loadingRef.current.style.zIndex = 100;
-    axios.get('/api/seeAllReviews/' + this.props.restaurant._id)
+    axios.get('http://localhost:3001/review/' + this.props.restaurant._id)
       .then(result => {this.props.getMoreReviews(result.data); this.props.loadingRef.current.style.zIndex = -1;})
       .catch(err => console.log('request reviews err', err));
   };
@@ -101,7 +106,7 @@ class Reviews extends React.Component{
               actions={<div><Button modal = 'close' style={{ backgroundColor : 'black', margin : '0.5em'}} >Close</Button><Button modal = 'close' style={{ margin : '0.5em', backgroundColor : 'black'}} onClick={this.submitReview}>POST</Button></div>}
               style={modalStyle}
               >
-              <br />
+              <br/>
 
               <Rating
                 emptySymbol = {<img src="/img/star-empty.png" className="icon" />}
@@ -109,10 +114,10 @@ class Reviews extends React.Component{
                 onChange = { rate => {
                   this.data.rating = rate
                 }}/>
-              <br /><br /><br />
+              <br/><br/><br/>
 
-                     맛있드나?
-                      <textarea style={{width:'100%',height:'55%'}} cols='15' rows='7' id="textarea1" ref={this.inputRef} />
+               맛있드나?
+                <textarea style={{width:'100%',height:'55%'}} cols='15' rows='7' id="textarea1" ref={this.inputRef} />
             </Modal>
             {this.isManyReviews()}
           </li>

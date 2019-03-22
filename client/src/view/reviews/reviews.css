@@ -13,7 +13,9 @@
     left: 1%;
     transition: all 500ms linear;
 }
-
+.collection-item {
+    height: 50px;
+}
 #expand_review {
     float: right;
     cursor: pointer;

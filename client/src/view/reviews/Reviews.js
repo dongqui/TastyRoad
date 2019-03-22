@@ -18,6 +18,28 @@ const Reviews_ = (props) => {
 
   useEffect(isActive(reviewsContainerRef, 'active_reviews'), [restaurantId]);
 
+  const submitReview = async () => {
+    this.data.user = this.props.user._id;
+    this.data.resId = this.props.restaurant._id;
+    this.data.review = this.inputRef.current.value;
+    const data = {user: user._id};
+
+
+    let isEmpty = Object.values(data).every(function(item) {
+      return !!item;
+    });
+
+    if (isEmpty) {
+      this.inputRef.current.value = '';
+      axios.post('/api/addReview', {data})
+          .then(result => this.moreReviewsOnclick())
+          .catch(err => console.log('post review err', err));
+    } else {
+      window.Materialize.toast('등록 실패! 양식에 맞춰서 다시 써 줘', 5000)
+    }
+
+  };
+
   const modalStyle = {
     width:'25%',
     height: '50%',
@@ -27,12 +49,12 @@ const Reviews_ = (props) => {
   return (
       <div>
         <ul ref={reviewsContainerRef} id="reviews_container" className="collection">
-          <li className="collection-item" style={{height: '50px'}}>
+          <li className="collection-item">
             <Modal
+                style={modalStyle}>
                 header={restaurant.name} fixedFooter
                 trigger={<span id='create_review_btn'> <i className="material-icons">create</i>리뷰 쓰기</span>}
                 actions={<div><Button modal='close' clasName='modal_btn'>Close</Button><Button modal='close' clasName='modal_btn' onClick={this.submitReview}>POST</Button></div>}
-                style={modalStyle}>
               <Rating
                   emptySymbol = {<img src="/img/star-empty.png" className="icon" />}
                   fullSymbol = {<img src="/img/star-full.png" className="icon" />}
@@ -42,7 +64,7 @@ const Reviews_ = (props) => {
             </Modal>
             {reviews.length > 2 ? <span id='expand_review' onClick={this.moreReviewsOnclick}> <i className="material-icons">expand_more</i></span> : '' }
           </li>
-
+          { reviews.map(review => <Review key={review._id} review={review}/>) }
         </ul>
       </div>
   );

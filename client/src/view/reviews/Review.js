@@ -2,7 +2,7 @@ import React from "react";
 
 const Review = function(props) {
 
-  const starsCount = function() {
+  const starsCount = () => {
     const count = Math.round(props.review.rating);
     let startArr = [];
     for (let i = 0; i < count; i++) {

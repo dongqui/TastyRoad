@@ -5,14 +5,47 @@ import { Button,Modal,Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
 import isActive from '../../helper/toggleClass';
+import useRequest from '../../hooks/useRequest';
 
 
 const Reviews_ = (props) => {
+  const [user, restaurant] = props;
+
   const reviewsContainerRef = useRef(null);
   const [reviews, setReviews] = useState(props.restaurant.reviews);
   const [restaurantId, setRestaurantId] = useState(props.restaurant._id);
+  const [rating, setRating] = useState(0);
+
   useEffect(isActive(reviewsContainerRef, 'active_reviews'), [restaurantId]);
 
+  const modalStyle = {
+    width:'25%',
+    height: '50%',
+    border: '0.2em solid black',
+    fontFamily: 'Do Hyeon, sans-serif'
+  };
+  return (
+      <div>
+        <ul ref={reviewsContainerRef} id="reviews_container" className="collection">
+          <li className="collection-item" style={{height: '50px'}}>
+            <Modal
+                header={restaurant.name} fixedFooter
+                trigger={<span id='create_review_btn'> <i className="material-icons">create</i>리뷰 쓰기</span>}
+                actions={<div><Button modal='close' clasName='modal_btn'>Close</Button><Button modal='close' clasName='modal_btn' onClick={this.submitReview}>POST</Button></div>}
+                style={modalStyle}>
+              <Rating
+                  emptySymbol = {<img src="/img/star-empty.png" className="icon" />}
+                  fullSymbol = {<img src="/img/star-full.png" className="icon" />}
+                  onChange = { rate => setRating(rate) }/>
+              맛있드나?
+              <textarea className='modal_textarea' cols='15' rows='7'/>
+            </Modal>
+            {reviews.length > 2 ? <span id='expand_review' onClick={this.moreReviewsOnclick}> <i className="material-icons">expand_more</i></span> : '' }
+          </li>
+
+        </ul>
+      </div>
+  );
 };
 class Reviews extends React.Component{
   
@@ -47,14 +80,13 @@ class Reviews extends React.Component{
   };
 
   makeReviewList = () =>{
-    const user = this.props.user;
     if (this.props.reviews) {
       return this.props.reviews.map(function (review, idx) {
-        return <Review review={review} user={user}/>
+        return <Review review={review}/>
       })
     } else {
       return this.props.restaurant.reviews.map(function (review, idx) {
-        return <Review review={review} user={user}/>
+        return <Review review={review}/>
       })
     }
 

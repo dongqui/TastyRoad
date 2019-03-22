@@ -4,13 +4,13 @@ import Map from '../map/map.js';
 import List from '../list/list';
 import Reviews from '../reviews/Reviews';
 import DetailInfo from "../detailInfo/detailInfo";
+import loading from '../loading/loading';
 import axios from 'axios';
 
 
 
 class Main extends Component {
-  
-  loadingRef = React.createRef();
+
   state={
     selectedId: -1,
     restaurants: [],
@@ -74,7 +74,7 @@ class Main extends Component {
         <List restaurants={this.state.restaurants} selectedId={this.state.selectedId} setSelectedId={this.setSelectedId}/>
         {this.renderReviews()}
         {this.renderDetail()}
-        <p ref={this.loadingRef} style={{color: 'black', zIndex: 100, position:'absolute', top: '10%', left:'29%', fontSize: '10em', fontFamily: 'Do Hyeon, sans-serif'}}>기달</p>
+        <loading/>
       </div>
     )
   }

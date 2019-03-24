@@ -29,16 +29,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        let restaurants = await Restaurant.find({}).
-        sort('-ratingsAverage').
-        populate({
-            path: 'reviews',
-            populate: {
-                path: 'user'
-            },
-            options: { limit: 2 }
-        });
-
+        let restaurants = await Restaurant.find({}).sort('-ratingsAverage');
         res.send(restaurants);
     } catch (e) {
         res.status(500).json({ error: e.toString() });
@@ -48,15 +39,7 @@ router.get('/', async (req, res) => {
 //see filterd restaurants by korean/japanese/chinese/etc and that has two populated reviews and that's user is populated also
 router.get('/restaurants/:filter', async (req, res) => {
     try {
-        let filteredRestaurants = await Restaurant.
-        find({filter: req.params.filter}).sort('-ratingsAverage').
-        populate({
-            path: 'reviews',
-            populate: {
-                path: 'user'
-            },
-            options: { limit: 2 }
-        });
+        let filteredRestaurants = await Restaurant.find({filter: req.params.filter}).sort('-ratingsAverage');
         res.send(filteredRestaurants);
     } catch (e) {
         res.status(500).json({ error: e.toString() });

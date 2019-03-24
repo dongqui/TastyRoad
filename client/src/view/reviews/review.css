@@ -1,0 +1,13 @@
+#review_star {
+  color: gold;
+}
+
+#review_content {
+  max-width: 100%;
+  margin-top: 10px;
+  white-space: pre-line;
+}
+
+#review_title {
+  color: darkGrey;
+}

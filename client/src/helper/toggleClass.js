@@ -1,4 +1,4 @@
-export default function toggleClass (ref, className) {
+export default toggleClass = (ref, className) => {
     return () => {
         let element = ref.current;
         if (element.classList.contains(className)) {

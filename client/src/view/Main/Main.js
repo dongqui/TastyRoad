@@ -1,23 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Nav from '../nav/nav.js';
 import Map from '../map/map.js';
 import List from '../list/list';
 import Reviews from '../reviews/Reviews';
 import DetailInfo from "../detailInfo/detailInfo";
 import loading from '../loading/loading';
-import axios from 'axios';
+import { getRestaurantsRequest } from '../../helper/axiosRequest';
+import useRequest from '../../hooks/useRequest';
 
+const Main_ = (props) => {
+  const { user } = props;
+  const [restaurant, setRestaurant] = useState(null);
+  const [restaurants, isLoading, error] = useRequest(getRestaurantsRequest);
+  const [reviews, setReviews] = usetState([]);
 
+  setFilter = e => {
+    this.loadingRef.current.style.zIndex = 100;
+    const filter = e;
+    axios.get('/restaurant/' + filter)
+      .then(result => {
+        if (result.data[0]) {
+          this.setState({restaurants: result.data, selectedId: -1});
+        } else {
+          this.setState({restaurants: [], selectedId: -1})
+        }
+        this.loadingRef.current.style.zIndex = -1;
+      })
+      .catch(err => console.log('request filtered restaurants err', err))
+  };
 
+  return (
+    <div className="row">
+      <Nav setFilter={this.setFilter} setRestaurant user/>
+      <div style={{backgroundColor: 'grey', width: '100%', height: '5px'}}/>
+      <Map restaurants={this.state.restaurants} restaurant setRestaurant/>
+      <List restaurants={this.state.restaurants} restaurant setRestaurant/>
+      { restaurant && <Reviews user restaurant/>}
+      { restaurant && <DetailInfo restaurant/>}
+      <loading/>
+    </div>
+  )
+};
 class Main extends Component {
 
   state={
-    selectedId: -1,
+    restaurant: null,
     restaurants: [],
     reviews: []
   };
 
   componentDidMount() {
+    console.log(process.env.NODE_ENV);
     axios.get('http://localhost:3001/restaurant')
       .then( response => {
         if (response.data[0]) {
@@ -56,14 +89,9 @@ class Main extends Component {
   renderReviews() {
     if (this.state.selectedId !== -1 && this.state.restaurants.length) {
       return <Reviews loadingRef={this.loadingRef}
-        user={this.props.user} reviews={this.state.reviews} getMoreReviews={this.getMoreReviews} restaurant={this.state.restaurants[this.state.selectedId]}/>
+        user={this.props.user} restaurant={this.state.restaurant}/>
     }
   };
-
-  getMoreReviews = (reviews) => {
-    this.setState({reviews: reviews});
-  };
-
 
   render() {
     return (

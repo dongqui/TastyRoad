@@ -17,7 +17,7 @@ const NavItem = function(props) {
   }
 
   return (
-    <li onClick={function() {props.setFilter(props.filter); props.setSelectedId(-1);}}><a href="#">{name}</a></li>
+    <li onClick={function() {props.setFilter(props.filter);}}><a href="#">{name}</a></li>
   )
 };
 

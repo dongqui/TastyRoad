@@ -1,5 +1,6 @@
 import React from 'react';
 import ListItem from "./listItem";
+import './list.css'
 
 const List = function(props) {
   const { restaurants, setRestaurant } = props;

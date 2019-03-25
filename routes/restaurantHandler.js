@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 });
 
 //see filterd restaurants by korean/japanese/chinese/etc and that has two populated reviews and that's user is populated also
-router.get('/restaurants/:filter', async (req, res) => {
+router.get('/:filter', async (req, res) => {
     try {
         let filteredRestaurants = await Restaurant.find({filter: req.params.filter}).sort('-ratingsAverage');
         res.send(filteredRestaurants);

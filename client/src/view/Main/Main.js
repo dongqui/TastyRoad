@@ -4,50 +4,40 @@ import Map from '../map/map.js';
 import List from '../list/list';
 import Reviews from '../reviews/Reviews';
 import DetailInfo from "../detailInfo/detailInfo";
-import loading from '../loading/loading';
-import { getRestaurantsRequest } from '../../helper/axiosRequest';
-import useRequest from '../../hooks/useRequest';
+import Loading from '../loading/loading';
+import { getRestaurantsRequest, getFilteredRestaurantsRequest } from '../../helper/axiosRequest';
 import axios from 'axios'
 
 const Main = (props) => {
   const { user } = props;
   const [restaurant, setRestaurant] = useState(null);
-  const [restaurants, setRestaurants] = useState({loading: false, restaurants: []});
+  const [restaurantsStates, setRestaurants] = useState({loading: false, restaurants: []});
 
   const getRestaurants = async () => {
-      setRestaurants({loading: true});
-      const response = await getRestaurantsRequest();
-      setIsLoading(false);
-      setRestaurants(response.data);
+    setRestaurants({loading: true, restaurants: []});
+    const response = await getRestaurantsRequest();
+    setRestaurants({loading:false, restaurants: response.data});
   };
+
+  const setFilter = async (filter) => {
+    setRestaurants({loading: true, restaurants: []});
+    const response = await getFilteredRestaurantsRequest(filter);
+    setRestaurants({loading:false, restaurants: response.data});
+  };
+
   useEffect(() => {
       getRestaurants()
   }, []);
 
-  // setFilter = e => {
-  //   this.loadingRef.current.style.zIndex = 100;
-  //   const filter = e;
-  //   axios.get('/restaurant/' + filter)
-  //     .then(result => {
-  //       if (result.data[0]) {
-  //         this.setState({restaurants: result.data, selectedId: -1});
-  //       } else {
-  //         this.setState({restaurants: [], selectedId: -1})
-  //       }
-  //       this.loadingRef.current.style.zIndex = -1;
-  //     })
-  //     .catch(err => console.log('request filtered restaurants err', err))
-  // };
-
   return (
     <div className="row">
-      <Nav setRestaurant user/>
+      { restaurantsStates.loading && <Loading/> }
+      <Nav setFilter={setFilter} user={user}/>
       <div style={{backgroundColor: 'grey', width: '100%', height: '5px'}}/>
-      <Map restaurants={restaurants} restaurant setRestaurant/>
-      <List restaurants={restaurants} restaurant setRestaurant/>
+      <Map restaurants={restaurantsStates.restaurants} />
+      <List restaurants={restaurantsStates.restaurants} />
       { restaurant && <Reviews user restaurant/>}
       { restaurant && <DetailInfo restaurant/>}
-      { isLoading && <loading/>}
     </div>
   )
 };

@@ -134,7 +134,7 @@ class Nav extends Component {
           <a href="#" className="brand-logo center" style={{fontFamily: 'Leckerli One ,cursive'}}>Tasty Road</a>
           <ul id="nav-mobile" className="left hide-on-med-and-down" style={{marginLeft: '50px', fontWeight: '5em'}}>
 
-            {this.filterArr.map((filter) => <NavItem setFilter={this.props.setFilter} setSelectedId={this.props.setSelectedId} filter={filter}/>)}
+            {this.filterArr.map((filter) => <NavItem setFilter={this.props.setFilter} filter={filter}/>)}
           </ul>
           <ul id="nav-mobile" className="right hide-on-med-and-down" style={{marginRight: '50px'}} >
             <li>

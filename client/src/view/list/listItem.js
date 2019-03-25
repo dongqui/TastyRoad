@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import './list.css'
+
 import isActive from "../../helper/toggleClass";
 
 // const ListItem_ = (props) => {

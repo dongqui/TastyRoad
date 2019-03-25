@@ -14,6 +14,6 @@ export const getRestaurantsRequest = async () => {
   return await axios.get(`${serverAddress}/restaurant/`);
 };
 
-export const getRestaurantsFilteredRequest = filter => {
-  return async () => await axios.get(`${serverAddress}/restaurant/${filter}`);
+export const getFilteredRestaurantsRequest = async filter => {
+  return await axios.get(`${serverAddress}/restaurant/${filter}`);
 };

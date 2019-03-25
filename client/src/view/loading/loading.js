@@ -1,6 +1,7 @@
 import React, { useState }from 'react';
+import './loading.css'
 
-export default () => {
+const Loading = () => {
 
     const [isLoading, setIsLoading] = useState();
 
@@ -9,3 +10,5 @@ export default () => {
         <p id='loading'>기달</p>
     )
 }
+
+export default Loading

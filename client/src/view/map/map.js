@@ -121,7 +121,7 @@ class Map extends Component {
   componentDidUpdate() {
     this.initailizeMap();
     this.makeMarkers();
-    if (this.props.selectedId !== -1) {
+    if (this.props.selectedId) {
       this.clickEventHandling(this.map, this.markers[this.props.selectedId]);
     } else {
       let centerPosition = new window.daum.maps.LatLng(37.545486, 127.051632);

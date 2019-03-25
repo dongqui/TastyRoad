@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Nav from '../nav/nav.js';
 import Map from '../map/map.js';
 import List from '../list/list';
@@ -7,41 +7,51 @@ import DetailInfo from "../detailInfo/detailInfo";
 import loading from '../loading/loading';
 import { getRestaurantsRequest } from '../../helper/axiosRequest';
 import useRequest from '../../hooks/useRequest';
+import axios from 'axios'
 
-const Main_ = (props) => {
+const Main = (props) => {
   const { user } = props;
   const [restaurant, setRestaurant] = useState(null);
-  const [restaurants, isLoading, error] = useRequest(getRestaurantsRequest);
-  const [reviews, setReviews] = usetState([]);
+  const [restaurants, setRestaurants] = useState({loading: false, restaurants: []});
 
-  setFilter = e => {
-    this.loadingRef.current.style.zIndex = 100;
-    const filter = e;
-    axios.get('/restaurant/' + filter)
-      .then(result => {
-        if (result.data[0]) {
-          this.setState({restaurants: result.data, selectedId: -1});
-        } else {
-          this.setState({restaurants: [], selectedId: -1})
-        }
-        this.loadingRef.current.style.zIndex = -1;
-      })
-      .catch(err => console.log('request filtered restaurants err', err))
+  const getRestaurants = async () => {
+      setRestaurants({loading: true});
+      const response = await getRestaurantsRequest();
+      setIsLoading(false);
+      setRestaurants(response.data);
   };
+  useEffect(() => {
+      getRestaurants()
+  }, []);
+
+  // setFilter = e => {
+  //   this.loadingRef.current.style.zIndex = 100;
+  //   const filter = e;
+  //   axios.get('/restaurant/' + filter)
+  //     .then(result => {
+  //       if (result.data[0]) {
+  //         this.setState({restaurants: result.data, selectedId: -1});
+  //       } else {
+  //         this.setState({restaurants: [], selectedId: -1})
+  //       }
+  //       this.loadingRef.current.style.zIndex = -1;
+  //     })
+  //     .catch(err => console.log('request filtered restaurants err', err))
+  // };
 
   return (
     <div className="row">
-      <Nav setFilter={this.setFilter} setRestaurant user/>
+      <Nav setRestaurant user/>
       <div style={{backgroundColor: 'grey', width: '100%', height: '5px'}}/>
-      <Map restaurants={this.state.restaurants} restaurant setRestaurant/>
-      <List restaurants={this.state.restaurants} restaurant setRestaurant/>
+      <Map restaurants={restaurants} restaurant setRestaurant/>
+      <List restaurants={restaurants} restaurant setRestaurant/>
       { restaurant && <Reviews user restaurant/>}
       { restaurant && <DetailInfo restaurant/>}
-      <loading/>
+      { isLoading && <loading/>}
     </div>
   )
 };
-class Main extends Component {
+class Main_ extends Component {
 
   state={
     restaurant: null,

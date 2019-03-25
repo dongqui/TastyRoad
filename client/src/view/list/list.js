@@ -15,9 +15,9 @@ const List = function(props) {
           restaurants.map((restaurant, idx) => {
             return (
               <ListItem
-                restaurant
-                idx
-                setRestaurant
+                restaurant={restaurant}
+                idx={idx}
+                setRestaurant={setRestaurant}
                 lastIdx={restaurants.length - 1}
                 key={restaurant._id}
               />

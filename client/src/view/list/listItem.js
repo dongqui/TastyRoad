@@ -2,27 +2,27 @@ import React, { useEffect, useRef } from "react";
 import './list.css'
 import isActive from "../../helper/toggleClass";
 
-const ListItem_ = (props) => {
-  const listItemContainer = useRef(null);
-  const { restaurant } = props;
-  useEffect(isActive(reviewsContainerRef, 'active_list'), [restaurant]);
-
-  return (
-    <li>
-      <div ref={listItemContainer} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.setSelectedId(this.props.idx)}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
-        <div className="card-image" style={{width: '30%'}}>
-          <img style={{width:'100%',height:'100%', backgroundColor: 'white'}} src={this.rankImage()}/>
-        </div>
-        <div className="card-stacked">
-          <div className="card-content">
-            <h6 style={{textAlign: 'center', marginTop: 0, fontWeight: 'bold'}}>{this.props.restaurant.name}</h6>
-            <div style={{textAlign: 'center'}}><span style={{marginRight: '10px'}}>평점 : {this.props.restaurant.ratingsAverage}</span><span >리뷰 : {this.props.restaurant.reviewCount}</span></div>
-          </div>
-        </div>
-      </div>
-    </li>
-  );
-};
+// const ListItem_ = (props) => {
+//   const listItemContainer = useRef(null);
+//   const { restaurant } = props;
+//   useEffect(isActive(reviewsContainerRef, 'active_list'), [restaurant]);
+//
+//   return (
+//     <li>
+//       <div ref={listItemContainer} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.setSelectedId(this.props.idx)}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
+//         <div className="card-image" style={{width: '30%'}}>
+//           <img style={{width:'100%',height:'100%', backgroundColor: 'white'}} src={this.rankImage()}/>
+//         </div>
+//         <div className="card-stacked">
+//           <div className="card-content">
+//             <h6 style={{textAlign: 'center', marginTop: 0, fontWeight: 'bold'}}>{this.props.restaurant.name}</h6>
+//             <div style={{textAlign: 'center'}}><span style={{marginRight: '10px'}}>평점 : {this.props.restaurant.ratingsAverage}</span><span >리뷰 : {this.props.restaurant.reviewCount}</span></div>
+//           </div>
+//         </div>
+//       </div>
+//     </li>
+//   );
+// };
 
 class ListItem extends React.Component {
 

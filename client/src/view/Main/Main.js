@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useReducer, useEffect } from 'react';
 import Nav from '../nav/nav.js';
 import Map from '../map/map.js';
 import List from '../list/list';
@@ -8,36 +8,60 @@ import Loading from '../loading/loading';
 import { getRestaurantsRequest, getFilteredRestaurantsRequest } from '../../helper/axiosRequest';
 import axios from 'axios'
 
+const initialState = {
+  restaurants: [],
+  restaurant: null,
+  loading: false,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'loading':
+      return {
+        ...state,
+        loading: true
+      };
+    case 'setRestaurants':
+      return {
+        ...state,
+        restaurants: action.restaurants,
+        restaurant: null,
+        loading: false,
+      };
+    default:
+      throw new Error();
+  }
+};
+
 const Main = (props) => {
   const { user } = props;
-  const [restaurant, setRestaurant] = useState(null);
-  const [restaurantsStates, setRestaurants] = useState({loading: false, restaurants: []});
+  const [{ restaurants, restaurant, loading }, dispatch] = useReducer(reducer, initialState);
 
   const getRestaurants = async () => {
-    setRestaurants({loading: true, restaurants: []});
+    dispatch({type: 'loading'});
     const response = await getRestaurantsRequest();
-    setRestaurants({loading:false, restaurants: response.data});
+    dispatch({type: 'setRestaurants', restaurants: response.data});
   };
 
   const setFilter = async (filter) => {
-    setRestaurants({loading: true, restaurants: []});
+    dispatch({type: 'loading'});
     const response = await getFilteredRestaurantsRequest(filter);
-    setRestaurants({loading:false, restaurants: response.data});
+    dispatch({type: 'setRestaurants', restaurants: response.data});
   };
 
   useEffect(() => {
-      getRestaurants()
+    getRestaurants();
   }, []);
 
   return (
     <div className="row">
-      { restaurantsStates.loading && <Loading/> }
+      { loading && <Loading/> }
       <Nav setFilter={setFilter} user={user}/>
       <div style={{backgroundColor: 'grey', width: '100%', height: '5px'}}/>
-      <Map restaurants={restaurantsStates.restaurants} />
-      <List restaurants={restaurantsStates.restaurants} />
-      { restaurant && <Reviews user restaurant/>}
-      { restaurant && <DetailInfo restaurant/>}
+      <Map restaurants={restaurants} />
+      <List restaurants={restaurants} />
+      { restaurant && <Reviews user={user} restaurant={restaurant}/>}
+      { restaurant && <DetailInfo restaurant={restaurant}/>}
     </div>
   )
 };

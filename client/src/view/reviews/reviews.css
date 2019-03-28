@@ -13,7 +13,7 @@
     left: 1%;
     transition: all 500ms linear;
 }
-.collection-item {
+#list_top {
     height: 50px;
 }
 #expand_review {
@@ -22,6 +22,7 @@
 }
 
 #create_review_btn {
+    font-size: 30px;
     float: left;
     cursor: pointer;
 }

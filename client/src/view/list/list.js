@@ -3,7 +3,7 @@ import ListItem from "./listItem";
 import './list.css'
 
 const List = function(props) {
-  const { restaurants, setRestaurant } = props;
+  const { restaurants, setRestaurant, dispatch } = props;
   return (
 
     <div className="cor s3" id='list_container'>
@@ -16,8 +16,10 @@ const List = function(props) {
           restaurants.map((restaurant, idx) => {
             return (
               <ListItem
+
                 restaurant={restaurant}
                 idx={idx}
+                dispatch={dispatch}
                 setRestaurant={setRestaurant}
                 lastIdx={restaurants.length - 1}
                 key={restaurant._id}

@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState } from 'react';
 import Review from './Review';
 import './reviews.css';
-import { Button,Modal } from 'react-materialize';
+import { Button, Modal } from 'react-materialize';
 import Rating from 'react-rating';
 import isActive from '../../helper/toggleClass';
 import { addReviewReqeust, getReviewsRequest } from '../../helper/axiosRequest'
@@ -9,14 +9,16 @@ import useInput from '../../hooks/useInput';
 
 
 const Reviews = (props) => {
-  const [user, restaurant] = props;
+  const { user, restaurant } = props;
   const reviewsContainerRef = useRef(null);
-  const [reviews, setReviews] = useState(restaurant.reviews);
+  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
-
   const reviewContent = useInput('');
 
-  useEffect(isActive(reviewsContainerRef, 'active_reviews'), [restaurant]);
+  useEffect(() => {
+    isActive(reviewsContainerRef, 'active_reviews');
+    getReviews();
+  }, [restaurant]);
 
   const checkEmptyData = (data) => {
     return Object.values(data).every(item => !!item);
@@ -24,8 +26,7 @@ const Reviews = (props) => {
 
   const addReview = async () => {
     const data = {user: user._id, resId: restaurant._id, review: reviewContent, rating};
-    let isValid = checkEmptyData(data);
-    if (!isValid) {
+    if (checkEmptyData(data)) {
       window.Materialize.toast('등록 실패! 양식에 맞춰서 다시 써 줘', 5000);
       return;
     }
@@ -39,7 +40,7 @@ const Reviews = (props) => {
 
   const getReviews = async () => {
     try {
-      const reviews = await getReviewsRequest(restaurant._id)();
+      const reviews = await getReviewsRequest(restaurant._id);
       setReviews(reviews);
     } catch(e) {
 
@@ -60,7 +61,7 @@ const Reviews = (props) => {
             <Modal style={modalStyle}>
                 header={restaurant.name} fixedFooter
                 trigger={<span id='create_review_btn'> <i className="material-icons">create</i>리뷰 쓰기</span>}
-                actions={<div><Button modal='close' clasName='modal_btn'>Close</Button><Button modal='close' clasName='modal_btn' onClick={addReview}>POST</Button></div>}
+                actions={<div><Button modal='close' className='modal_btn'>Close</Button><Button modal='close' className='modal_btn' onClick={addReview}>POST</Button></div>}
               <Rating>
                   emptySymbol = {<img src="/img/star-empty.png" className="icon" />}
                   fullSymbol = {<img src="/img/star-full.png" className="icon" />}

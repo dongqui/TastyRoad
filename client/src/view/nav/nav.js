@@ -3,6 +3,7 @@ import { Button,Modal,Row,Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
 import List from './List.js'
+import './nav.css'
 import NavItem from "./navItem";
 
 
@@ -130,7 +131,6 @@ class Nav extends Component {
     return (
       <nav>
         <div className="nav-wrapper" style={{backgroundColor: "black"}}>
-
           <a href="#" className="brand-logo center" style={{fontFamily: 'Leckerli One ,cursive'}}>Tasty Road</a>
           <ul id="nav-mobile" className="left hide-on-med-and-down" style={{marginLeft: '50px', fontWeight: '5em'}}>
 
@@ -191,6 +191,7 @@ class Nav extends Component {
               </Modal>
             </li>
           </ul>
+          <div id='nav_bottom_line'/>
         </div>
       </nav>
     );

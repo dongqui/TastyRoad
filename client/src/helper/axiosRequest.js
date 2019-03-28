@@ -3,17 +3,21 @@ import axios from 'axios';
 const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
 
 export const addReviewReqeust = async data => {
-  return await axios.post(`${serverAddress}/api/addReview`, data);
+  let response = axios.post(`${serverAddress}/api/addReview`, data);
+  return response.data;
 };
 
-export const getReviewsRequest = restaurantId => {
-  return async () => await axios.get(`${serverAddress}/review/${restaurantId}`);
+export const getReviewsRequest = async restaurantId => {
+  let response = await axios.get(`${serverAddress}/review/${restaurantId}`);
+  return response.data;
 };
 
 export const getRestaurantsRequest = async () => {
-  return await axios.get(`${serverAddress}/restaurant/`);
+  let response = await axios.get(`${serverAddress}/restaurant/`);
+  return response.data;
 };
 
 export const getFilteredRestaurantsRequest = async filter => {
-  return await axios.get(`${serverAddress}/restaurant/${filter}`);
+  const response = await axios.get(`${serverAddress}/restaurant/${filter}`);
+  return response.data;
 };

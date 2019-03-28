@@ -4,7 +4,9 @@ import './detailInfo.css';
 
 function DetailInfo(props) {
   const detailInfoDiv = useRef(null);
-  useEffect(isActive(detailInfoDiv, 'active_info'));
+  useEffect(() => {
+      isActive(detailInfoDiv, 'active_info')
+  }, []);
 
   return (
       <div ref={detailInfoDiv} id='detailed'>

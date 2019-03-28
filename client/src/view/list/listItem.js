@@ -66,7 +66,7 @@ class ListItem extends React.Component {
   render() {
     return (
       <li>
-        <div ref={this.listItem} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.setSelectedId(this.props.idx)}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
+        <div ref={this.listItem} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.dispatch({type: 'setRestaurant', restaurant: this.props.restaurant})}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
           <div className="card-image" style={{width: '30%'}}>
             <img style={{width:'100%',height:'100%', backgroundColor: 'white'}} src={this.rankImage()}/>
           </div>

@@ -5,3 +5,21 @@
     position: absolute;
     bottom: 0;
 }
+
+.back-black {
+    background-color: black;
+}
+
+.logo-font {
+    font-family: Leckerli One, cursive;
+}
+
+#filter-ul {
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+#nav-post-icon {
+    margin-right: 50px;
+    color: white;
+}

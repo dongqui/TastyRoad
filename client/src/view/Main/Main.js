@@ -48,7 +48,7 @@ const Main = (props) => {
     dispatch({type: 'setRestaurants', restaurants});
   };
 
-  const setFilter = async (filter) => {
+  const setFilter = (filter) => async () => {
     dispatch({type: 'loading'});
     const restaurants = await getFilteredRestaurantsRequest(filter);
     dispatch({type: 'setRestaurants', restaurants});

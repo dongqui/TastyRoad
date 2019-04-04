@@ -6,8 +6,24 @@ import List from './List.js'
 import './nav.css'
 import NavItem from "./navItem";
 
+const Nav = (props) => {
+  const filterArr = ['ALL', 'korean', 'japanese', 'chinese', 'western', 'etc'];
+  const { setFilter } = props;
+  return (
+      <nav>
+        <div className="nav-wrapper back-black">
+          <a href="#" className="brand-logo center logo-font">Tasty Road</a>
+          <ul className="left" id="filter-ul">
+            {filterArr.map(filter => <NavItem setFilter={setFilter} filter={filter}/>)}
+          </ul>
+          <a href="#"><i className="material-icons">create</i>식당 등록</a>
+          <div id='nav_bottom_line'/>
+        </div>
+      </nav>
+  );
+};
 
-class Nav extends Component {
+class Nav_ extends Component {
   modalRef = React.createRef();
   modalInput = React.createRef();
   modalTextArea = React.createRef();
@@ -43,7 +59,6 @@ class Nav extends Component {
 
   onClickRadio = (e) => {
     this.data.filter = e.target.value;
-    console.log(this.data.filter);
   };
 
   onChange = (e) => {
@@ -119,7 +134,7 @@ class Nav extends Component {
   };
 
 
-  filterArr = ['', 'korean', 'japanese', 'chinese', 'western', 'etc']
+  filterArr = ['', 'korean', 'japanese', 'chinese', 'western', 'etc'];
 
   render() {
 

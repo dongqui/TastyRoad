@@ -1,23 +1,25 @@
 import React from 'react';
 
 const NavItem = function(props) {
-  let name ='';
-  if (props.filter === '') {
-    name = 'ALL';
-  } else if (props.filter === 'korean') {
+  const { filter, setFilter } = props;
+
+  let name = 'All';
+  if (filter === 'korean') {
     name = '한 식'
-  } else if (props.filter === 'japanese') {
+  } else if (filter === 'japanese') {
     name = '일 식'
-  } else if (props.filter === 'chinese') {
+  } else if (filter === 'chinese') {
     name = '중 식'
-  } else if (props. filter === 'western') {
+  } else if (filter === 'western') {
     name = '양 식'
-  } else {
+  } else if (filter === 'etc'){
     name = '기 타'
   }
 
   return (
-    <li onClick={function() {props.setFilter(props.filter);}}><a href="#">{name}</a></li>
+    <li onClick={setFilter(filter)}>
+      <a href="#">{name}</a>
+    </li>
   )
 };
 

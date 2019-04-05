@@ -13,17 +13,12 @@
     left: 1%;
     transition: all 500ms linear;
 }
-#list_top {
-    height: 50px;
+#review-list-top {
+    height: auto;
 }
-#expand_review {
-    float: right;
-    cursor: pointer;
-}
-
 #create_review_btn {
-    font-size: 30px;
-    float: left;
+    font-size: 20px;
+    float: right;
     cursor: pointer;
 }
 
@@ -35,4 +30,15 @@
 .modal_textarea {
     width:100%;
     height:55%;
+}
+
+.review-post-btn {
+    width: 100%;
+    background-color: black;
+}
+
+#review-list-title {
+    font-size: 20px;
+    display: inline-block;
+    width: 73%;
 }

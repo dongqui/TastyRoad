@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavItem = function(props) {
+const NavFilter = function(props) {
   const { filter, setFilter } = props;
 
   let name = 'All';
@@ -23,4 +23,4 @@ const NavItem = function(props) {
   )
 };
 
-export default NavItem
+export default NavFilter

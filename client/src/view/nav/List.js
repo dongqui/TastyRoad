@@ -7,7 +7,6 @@ class List extends Component {
       backgroundColor:'black',
       color :'white',
       padding: '1em 0 1em 2em',
-      // border : '0.5em solid #00CED1',
       border: '0.2em solid white',
       borderRadius: '0.5em'
     }

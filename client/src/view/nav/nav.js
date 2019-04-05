@@ -4,7 +4,7 @@ import Rating from 'react-rating';
 import axios from 'axios';
 import List from './List.js'
 import './nav.css'
-import NavItem from "./navItem";
+import NavFilter from "./navFilter";
 
 const Nav = (props) => {
   const filterArr = ['ALL', 'korean', 'japanese', 'chinese', 'western', 'etc'];
@@ -14,7 +14,7 @@ const Nav = (props) => {
         <div className="nav-wrapper back-black">
           <a href="#" className="brand-logo center logo-font">Tasty Road</a>
           <ul className="left" id="filter-ul">
-            {filterArr.map(filter => <NavItem setFilter={setFilter} filter={filter}/>)}
+            {filterArr.map(filter => <NavFilter setFilter={setFilter} filter={filter}/>)}
           </ul>
           <a href="#"><i className="material-icons">create</i>식당 등록</a>
           <div id='nav_bottom_line'/>
@@ -149,7 +149,7 @@ class Nav_ extends Component {
           <a href="#" className="brand-logo center" style={{fontFamily: 'Leckerli One ,cursive'}}>Tasty Road</a>
           <ul id="nav-mobile" className="left hide-on-med-and-down" style={{marginLeft: '50px', fontWeight: '5em'}}>
 
-            {this.filterArr.map((filter) => <NavItem setFilter={this.props.setFilter} filter={filter}/>)}
+            {this.filterArr.map((filter) => <NavFilter setFilter={this.props.setFilter} filter={filter}/>)}
           </ul>
           <ul id="nav-mobile" className="right hide-on-med-and-down" style={{marginRight: '50px'}} >
             <li>

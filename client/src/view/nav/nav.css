@@ -19,7 +19,22 @@
     font-weight: bold;
 }
 
-#nav-post-icon {
+.post-icon-container {
+    height: 100%;
+}
+
+.post-icon-container:hover {
+    cursor: pointer;
+}
+
+#post-restaurant-btn {
     margin-right: 50px;
     color: white;
+    height: 100%;
+    font-weight: bold;
+    padding: 0 12px;
+}
+
+#nav-post-icon {
+    display: inline-block;
 }

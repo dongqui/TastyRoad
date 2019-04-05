@@ -1,0 +1,14 @@
+.review-post-btn {
+    width: 100%;
+    background-color: black;
+}
+
+.review-post-btn:hover,
+.review-post-btn:focus {
+    background-color: #888888;
+}
+
+.modal_textarea {
+    width:100%;
+    height:55%;
+}

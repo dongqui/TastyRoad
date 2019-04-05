@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Button,Modal,Row,Input } from 'react-materialize';
+import { Button, Row, Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
 import List from './List.js'
 import './nav.css'
-import NavFilter from "./navFilter";
+import NavFilter from './navFilter';
+import Modal from '../modal/Modal';
 
 const Nav = (props) => {
   const filterArr = ['ALL', 'korean', 'japanese', 'chinese', 'western', 'etc'];
@@ -16,9 +17,12 @@ const Nav = (props) => {
           <ul className="left" id="filter-ul">
             {filterArr.map(filter => <NavFilter setFilter={setFilter} filter={filter}/>)}
           </ul>
-          <a href="#"><i className="material-icons">create</i>식당 등록</a>
+          <div className="post-icon-container right">
+            <i className="material-icons" id="nav-post-icon">create</i><a className="right" href="#" id="post-restaurant-btn">식당 등록</a>
+          </div>
           <div id='nav_bottom_line'/>
         </div>
+        <Modal/>
       </nav>
   );
 };

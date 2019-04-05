@@ -24,4 +24,4 @@ const WriteReview = function(props) {
     );
 };
 
-export default WriteReview
+export default WriteReview;

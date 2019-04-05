@@ -1,27 +1,40 @@
-import List from "./nav";
-import {Input, Row} from "react-materialize";
+import { Input } from "react-materialize";
 import React, { useState } from "react";
+import Rating from 'react-rating';
+import './PostRestaurant.css';
+import SearchListItem from './SearchListItem';
+import emptyStar from "../reviews/img/star-empty.png";
+import fullStart from "../reviews/img/star-full.png";
+import useInput from "../../hooks/useInput";
 
 const PostRestaurant = () => {
 
+    const [ rate, setRate ] = useState(0);
+    const [ placeData, setPlaceData ] = useState([]);
+    const [ reviewContent, setReviewContent ] = useInput('');
+    const places = new window.daum.maps.services.Places();
 
+    const searchReataurantWithname = (event) => {
+        const restaurantName = event.target.value;
+        places.keywordSearch(restaurantName, searchRestaurantCallback, {
+            location: new window.daum.maps.LatLng(37.545486, 127.051632),
+            radius: 3000,
+            size: 5,
+        } );
+    };
+    const searchRestaurantCallback = (placeData, status) => {
+        if (status === window.daum.maps.services.Status.OK) {
+            setPlaceData(placeData);
+        }
+    };
 
     return (
-        <Row>
+        <div>
             음식점
-            <input
-                ref={this.modalInput}
-                onChange = {this.onChange}
-                placeholder = '음식점 이름을 적어주세요!'
-                id = 'input'
-            />
-            {this.state.mapData.length ? this.state.mapData.map((data) => {
-                return <List
-                    place={data}
-                    onClick = {this.onClickHandler}
-                />
-            }) : '' }
-            <br /><br />
+            <Input onChange = {searchReataurantWithname} placeholder = '음식점 이름을 적어주세요!' />
+            <ul>
+                { placeData.map( data => <SearchListItem data={data}/>)}
+            </ul>
 
             <Input name='group1' type='radio' value='korean' label='한식' className='with-gap' />
             <Input name='group1' type='radio' value='western' label='양식' className='with-gap' />
@@ -29,24 +42,21 @@ const PostRestaurant = () => {
             <Input name='group1' type='radio' value='chinese' label='중식' className='with-gap' />
             <Input name='group1' type='radio' value='etc' label='기타' className='with-gap' />
 
-            <br /><br />
             <Rating
-                emptySymbol = {<img src="/img/star-empty.png" className="icon" />}
-                fullSymbol = {<img src="/img/star-full.png" className="icon" />}
-                onChange = { rate => {
-                    this.data.rating = rate
-                }
-                }/>
-            <br /><br />
+                emptySymbol = {<img alt='' src={emptyStar} className="icon" />}
+                fullSymbol = {<img alt='' src={fullStart} className="icon" />}
+                onChange = { rate => setRate(rate) }
+            />
             음식의 맛을 평가해주세요!
             <textarea
-                ref={this.modalTextArea}
                 rows='7'
                 cols='15'
                 label='review'
                 style={{width:'100%', height:'15%'}}
-                onChange={this.handleChange}
+                onChange={ setReviewContent }
             />
-        </Row>
+        </div>
     )
 };
+
+export default PostRestaurant;

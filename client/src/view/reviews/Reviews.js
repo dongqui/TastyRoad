@@ -45,6 +45,7 @@ const Reviews = (props) => {
   const checkEmptyData = (data) => {
     return Object.values(data).every(item => !!item);
   };
+
   return (
       <div>
         <ul ref={reviewsContainerRef} id="reviews_container" className="collection">

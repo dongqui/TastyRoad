@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Button, Row, Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
-import List from './List.js'
+import List from './SearchListItem.js'
 import './nav.css'
 import NavFilter from './navFilter';
 import Modal from '../modal/Modal';
+import PostRestaurant from './PostRestaurant';
 
 const Nav = (props) => {
   const filterArr = ['ALL', 'korean', 'japanese', 'chinese', 'western', 'etc'];
+  const [ modalOpen, setModalOpen ] = useState(false);
   const { setFilter } = props;
   return (
       <nav>
@@ -17,12 +19,14 @@ const Nav = (props) => {
           <ul className="left" id="filter-ul">
             {filterArr.map(filter => <NavFilter setFilter={setFilter} filter={filter}/>)}
           </ul>
-          <div className="post-icon-container right">
+          <div className="post-icon-container right" onClick={() => setModalOpen(true)}>
             <i className="material-icons" id="nav-post-icon">create</i><a className="right" href="#" id="post-restaurant-btn">식당 등록</a>
           </div>
           <div id='nav_bottom_line'/>
         </div>
-        <Modal/>
+        <Modal modalOpen={modalOpen} close={() => setModalOpen(false)}>
+          <PostRestaurant />
+        </Modal>
       </nav>
   );
 };

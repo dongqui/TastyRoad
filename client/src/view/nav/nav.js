@@ -24,7 +24,7 @@ const Nav = (props) => {
           </div>
           <div id='nav_bottom_line'/>
         </div>
-        <Modal modalOpen={modalOpen} close={() => setModalOpen(false)}>
+        <Modal modalOpen={modalOpen} close={() => setModalOpen(false)} header={"식당 등록"}>
           <PostRestaurant />
         </Modal>
       </nav>

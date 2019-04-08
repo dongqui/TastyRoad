@@ -10,7 +10,8 @@ import useInput from "../../hooks/useInput";
 const PostRestaurant = () => {
 
     const [ rate, setRate ] = useState(0);
-    const [ placeData, setPlaceData ] = useState([]);
+    const [ placesData, setPlacesData ] = useState([]);
+    const [ selectedPlace, setSelectedPlace] = useState(null);
     const [ reviewContent, setReviewContent ] = useInput('');
     const places = new window.daum.maps.services.Places();
 
@@ -24,16 +25,17 @@ const PostRestaurant = () => {
     };
     const searchRestaurantCallback = (placeData, status) => {
         if (status === window.daum.maps.services.Status.OK) {
-            setPlaceData(placeData);
+            setPlacesData(placeData);
         }
     };
 
     return (
         <div>
             음식점
-            <Input onChange = {searchReataurantWithname} placeholder = '음식점 이름을 적어주세요!' />
+            <input value={selectedPlace ? selectedPlace.place_name : ''} onChange = {searchReataurantWithname} placeholder = '음식점 이름을 적어주세요!' />
+            { selectedPlace}
             <ul>
-                { placeData.map( data => <SearchListItem data={data}/>)}
+                { placesData.map( data => <SearchListItem data={data} setSelectedPlace={setSelectedPlace} />)}
             </ul>
 
             <Input name='group1' type='radio' value='korean' label='한식' className='with-gap' />
@@ -47,7 +49,7 @@ const PostRestaurant = () => {
                 fullSymbol = {<img alt='' src={fullStart} className="icon" />}
                 onChange = { rate => setRate(rate) }
             />
-            음식의 맛을 평가해주세요!
+            음식 맛을 평가해주세요!
             <textarea
                 rows='7'
                 cols='15'

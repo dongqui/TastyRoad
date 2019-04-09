@@ -1,6 +1,7 @@
-.review-post-btn {
-    width: 100%;
+.write-btn {
+    width: 50%;
     background-color: black;
+    border-radius: 5px;
 }
 
 .review-post-btn:hover,
@@ -8,7 +9,20 @@
     background-color: #888888;
 }
 
-.modal_textarea {
+.write-textarea {
     width:100%;
     height:55%;
 }
+
+.write-header {
+    border-bottom: lightgrey solid 1px;
+    margin-bottom: 30px;
+    padding: 10px 5px;
+
+}
+
+.write-btn:hover {
+    background-color: #888888;
+}
+
+textarea {resize: none}

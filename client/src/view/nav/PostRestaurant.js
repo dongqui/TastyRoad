@@ -9,6 +9,7 @@ import useInput from "../../hooks/useInput";
 
 const PostRestaurant = () => {
 
+    const { close } = props;
     const [ rate, setRate ] = useState(0);
     const [ placesData, setPlacesData ] = useState([]);
     const [ selectedPlace, setSelectedPlace] = useState(null);
@@ -29,13 +30,19 @@ const PostRestaurant = () => {
         }
     };
 
+    const clickPlaceList = (place) => () => {
+        setSelectedPlace(place);
+        setPlacesData([]);
+    };
+
     return (
         <div>
+            {console.log('render!!')}
             음식점
             <input value={selectedPlace ? selectedPlace.place_name : ''} onChange = {searchReataurantWithname} placeholder = '음식점 이름을 적어주세요!' />
             { selectedPlace}
             <ul>
-                { placesData.map( data => <SearchListItem data={data} setSelectedPlace={setSelectedPlace} />)}
+                { placesData.map( data => <SearchListItem clickPlaceList={clickPlaceList} data={data} setSelectedPlace={setSelectedPlace} />)}
             </ul>
 
             <Input name='group1' type='radio' value='korean' label='한식' className='with-gap' />
@@ -57,6 +64,8 @@ const PostRestaurant = () => {
                 style={{width:'100%', height:'15%'}}
                 onChange={ setReviewContent }
             />
+            <button>POST</button>
+            <button onClick={close}>CLOSE</button>
         </div>
     )
 };

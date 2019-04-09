@@ -17,35 +17,15 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 25%;
+    width: 500px;
 }
 
-.modal-header {
-    border-bottom: lightgrey solid 1px;
-    margin-bottom: 30px;
-    padding: 10px 5px;
-}
 
-/* The Close Button */
 
-.modal-close {
-    color: black;
-    float: right;
-    font-size: 22px;
-    font-weight: bold;
-
-}
 .modal-title {
     display: inline-block;
     width: 70%;
     color: black;
     font-size: 22px;
     font-weight: bold;
-}
-
-.modal-close:hover,
-.modal-close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }

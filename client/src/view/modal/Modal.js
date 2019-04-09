@@ -10,9 +10,6 @@ const modal = (props) => {
                  display: modalOpen ? 'block' : 'none'
              }}>
             <div className="modal-content">
-                <div className="modal-header">
-                    <span className="modal-title">{ header }</span><span className="modal-close" onClick={close}>x</span>
-                </div>
                 {children}
             </div>
         </div>

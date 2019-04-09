@@ -56,8 +56,8 @@ const Reviews = (props) => {
           { reviews.map(review => <Review key={review._id} review={review}/>) }
         </ul>
 
-        <Modal modalOpen={modalOpen} close={() => setModalOpen(false)} header={restaurant.name}>
-          <WriteReview addReview={addReview} />
+        <Modal modalOpen={modalOpen}>
+          <WriteReview addReview={addReview} close={() => setModalOpen(false)} header={restaurant.name} />
         </Modal>
       </div>
   );

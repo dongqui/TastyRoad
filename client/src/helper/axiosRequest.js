@@ -21,3 +21,8 @@ export const getFilteredRestaurantsRequest = async filter => {
   const response = await axios.get(`${serverAddress}/restaurant/${filter}`);
   return response.data;
 };
+
+export const postRestaurantRequest = async (data) => {
+  const response = await axios.post(`${serverAddress}/restaurant`, data);
+  return response.data;
+};

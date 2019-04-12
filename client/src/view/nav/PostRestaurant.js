@@ -6,6 +6,7 @@ import SearchListItem from './SearchListItem';
 import emptyStar from "../reviews/img/star-empty.png";
 import fullStart from "../reviews/img/star-full.png";
 import useInput from "../../hooks/useInput";
+import { postRestaurantRequest } from "../../helper/axiosRequest";
 
 const PostRestaurant = (props) => {
 
@@ -30,6 +31,7 @@ const PostRestaurant = (props) => {
       size: 5,
     });
   };
+
   const searchRestaurantCallback = (placeData, status) => {
     if (status === window.daum.maps.services.Status.OK) {
       setPlacesData(placeData);
@@ -42,7 +44,7 @@ const PostRestaurant = (props) => {
     searchInput.current.value = place.place_name;
   };
 
-  const submitNewPost = () => {
+  const submitNewPost = async () => {
     const { id, place_name, y, x, place_url } = selectedPlace;
     const data = {
       daumPId: id,
@@ -52,11 +54,11 @@ const PostRestaurant = (props) => {
       review: reviewContent,
       rating: rate,
       filter
-    }
+    };
 
-    //request post
+    await postRestaurantRequest(data);
   };
-  console.log(filter);
+
   return (
     <div>
       <h4 id="post-header">새 맛집 등록</h4>
@@ -68,13 +70,14 @@ const PostRestaurant = (props) => {
         <RadioGroup
           name="filter"
           radioClassNames="post_radio"
+          onChange={(e) => setFilter(e.target.value)}
           options={[
             {label: '한식', value: 'korean'},
             {label: '양식', value: 'western'},
             {label: '일식', value: 'japanese'},
             {label: '중식', value: 'chinese'},
             {label: '일식', value: 'japanese'},
-            {label: 'etc', value: '기타'}
+            {label: '기타', value: 'etc'}
           ]}
         />
       </div>
@@ -83,16 +86,17 @@ const PostRestaurant = (props) => {
       <Rating
         emptySymbol = {<img alt='' src={emptyStar} className="icon" />}
         fullSymbol = {<img alt='' src={fullStart} className="icon" />}
-        onChange = { rate => setRate(rate) }
+        onChange = {rate => setRate(rate)}
+        initialRating = {rate}
       />
       <textarea
         rows='7'
         cols='15'
         id="post-textarea"
-        onChange={ (e) => setReviewContent(e.target.value) }
+        onChange={ setReviewContent }
         placeholder='어땠어요?'
       />
-      <button className="post-btn">POST</button>
+      <button className="post-btn" onClick={submitNewPost}>POST</button>
       <button className="post-btn" onClick={close}>CLOSE</button>
     </div>
   )

@@ -57,6 +57,8 @@ const PostRestaurant = (props) => {
     };
 
     await postRestaurantRequest(data);
+
+    // 스테이트? 인풋 초기화
   };
 
   return (

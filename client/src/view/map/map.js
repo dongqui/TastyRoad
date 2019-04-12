@@ -1,7 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import './map.css';
 
+const _Map = (props) => {
+  const DaumMap = window.daum.maps;
+  const mapContainer = useRef(null);
+
+  const setMap = (centerLat, centerLng) => {
+    const centerCoordinate = new DaumMap.LatLng(centerLat, centerLng);
+    const options = {
+      center: centerCoordinate,
+      level: 4
+    };
+
+    return DaumMap.Map(mapContainer.current, options);
+  };
+
+  const makeMarkerImage = (imgSrc) => {
+    const imageSize = new DaumMap.size(40, 40);
+    return new DaumMap.MarkerImage(imgSrc, imageSize);
+  };
+
+  return (
+    <div className="col s9" style={{backgroundColor: "grey", paddingLeft:'5px', paddingRight:'5px'}}>
+      <div ref={mapContainer} id="map" style={{width: '100%', height: '100vh'}} />
+    </div>
+  )
+
+
+};
+
+
 class Map extends Component {
+  makeMap = function() {
+    let markerImage = this.makeMarkerImage('codestates.ico', true);
+
+    let centerPosition = new window.daum.maps.LatLng(37.545486, 127.051632);// 패스트 파이브 성수점 좌표
+    const container = document.getElementById('map');
+    let options = {
+      center: centerPosition,
+      level: 4
+    };
+
+    this.map = new window.daum.maps.Map(container, options);
+
+    const centerMarker = new window.daum.maps.Marker({position: centerPosition, image: markerImage, zIndex: 3});
+    centerMarker.setMap(this.map);
+  };
 
   markers = [];
   openedWindow;
@@ -11,7 +55,7 @@ class Map extends Component {
     let imageSrc = window.location.origin + '/img/' + imageName;
     let imageSize;
     if (isCenter) {
-      imageSize  = new window.daum.maps.Size(60, 60); // 마커이미지의 크기
+      imageSize  = new window.daum.maps.Size(40, 40); // 마커이미지의 크기
     } else {
       imageSize = new window.daum.maps.Size(40, 40); // 마커이미지의 크기
     }

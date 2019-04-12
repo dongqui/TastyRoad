@@ -2,3 +2,40 @@ Input {
     color: black;
 }
 
+.post_radio {
+    margin-right: 30px;
+}
+
+#post-input:focus {
+    border-bottom: 1px solid #000000 !important;
+    box-shadow: 0 1px 0 0 #000000 !important;
+}
+
+#post-textarea {
+    width:100%;
+    height:15%;
+}
+#post-textarea:focus {
+    outline: none !important;
+    border-bottom: 1px solid #000000;
+    box-shadow: 1px 1px #000000;
+}
+
+#radio-container {}
+
+#post-header {
+    text-align: center;
+    color: black;
+}
+
+.post-btn {
+    height: 50px;
+    width: 50%;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+}
+
+.post-btn:hover {
+    background-color: #888888;
+}

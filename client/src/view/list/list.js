@@ -3,7 +3,7 @@ import ListItem from "./listItem";
 import './list.css'
 
 const List = function(props) {
-  const { restaurants, setRestaurant, dispatch } = props;
+  const { restaurant, restaurants, dispatch } = props;
   return (
 
     <div className="cor s3" id='list_container'>
@@ -13,18 +13,16 @@ const List = function(props) {
             <p>정교한 필터 따윈 없다.<br/> 오직 평점 순으로 나열한다. <br/>진정한 필터는 그대의 입.</p>
         </li>
         {
-          restaurants.map((restaurant, idx) => {
+          restaurants.map((restaurantListItem, idx) => {
             return (
               <ListItem
-
-                restaurant={restaurant}
-                idx={idx}
-                dispatch={dispatch}
-                setRestaurant={setRestaurant}
-                lastIdx={restaurants.length - 1}
-                key={restaurant._id}
-              />
-            )
+                  restaurantListItem={restaurantListItem}
+                  key={restaurantListItem._id}
+                  restaurant={restaurant}
+                  idx={idx}
+                  dispatch={dispatch}
+                  lastIdx={restaurants.length - 1}/>
+                  )
           })
         }
       </ul>

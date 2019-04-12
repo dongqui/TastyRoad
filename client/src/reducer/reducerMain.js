@@ -19,6 +19,7 @@ const reducer = (state, action) => {
                 loading: false,
             };
         case 'setRestaurant':
+            console.log(action.restaurant);
             return {
                 ...state,
                 restaurant: action.restaurant

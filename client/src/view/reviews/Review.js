@@ -2,6 +2,7 @@ import React from "react";
 import './review.css'
 
 const Review = function(props) {
+
   const { rating, review } = props.review;
   const { picture, username } = props.review.user;
   const starsCount = () => {

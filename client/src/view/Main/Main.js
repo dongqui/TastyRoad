@@ -1,4 +1,4 @@
-import React, { Component, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import Nav from '../nav/nav.js';
 import Map from '../map/map.js';
 import List from '../list/list';

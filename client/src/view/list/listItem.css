@@ -1,0 +1,33 @@
+.listitem_container {
+    margin: 0;
+    height: 100px;
+    cursor: pointer;
+}
+
+.active_list {
+    border: 5px solid #151719;
+}
+
+.listitem_card_container {
+    width: 30%;
+}
+
+.listitem_img {
+    width: 100%;
+    height:100%;
+    background-color: white;
+}
+
+.card_header {
+    text-align: center;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.card_foot {
+    text-align: center;
+}
+
+.listitem_ratingpoint {
+    margin-right: 10px;
+}

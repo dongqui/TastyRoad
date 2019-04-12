@@ -1,85 +1,60 @@
 import React, { useEffect, useRef } from "react";
+import './listItem.css'
 
-import isActive from "../../helper/toggleClass";
+const ListItem = (props) => {
+  const listItemContainer = useRef(null);
+  const { restaurantListItem, restaurant, idx, lastIdx, dispatch } = props;
 
-// const ListItem_ = (props) => {
-//   const listItemContainer = useRef(null);
-//   const { restaurant } = props;
-//   useEffect(isActive(reviewsContainerRef, 'active_list'), [restaurant]);
-//
-//   return (
-//     <li>
-//       <div ref={listItemContainer} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.setSelectedId(this.props.idx)}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
-//         <div className="card-image" style={{width: '30%'}}>
-//           <img style={{width:'100%',height:'100%', backgroundColor: 'white'}} src={this.rankImage()}/>
-//         </div>
-//         <div className="card-stacked">
-//           <div className="card-content">
-//             <h6 style={{textAlign: 'center', marginTop: 0, fontWeight: 'bold'}}>{this.props.restaurant.name}</h6>
-//             <div style={{textAlign: 'center'}}><span style={{marginRight: '10px'}}>평점 : {this.props.restaurant.ratingsAverage}</span><span >리뷰 : {this.props.restaurant.reviewCount}</span></div>
-//           </div>
-//         </div>
-//       </div>
-//     </li>
-//   );
-// };
+  useEffect(() => {
+    activeClassOnClick();
+  }, [restaurant]);
 
-class ListItem extends React.Component {
-
-  listItem = React.createRef();
-
-  isActive = function () {
-    this.listItem.current.classList.remove('active_list');
-    if (this.props.selectedId === this.props.idx) {
-      this.listItem.current.classList.add('active_list');
+  const activeClassOnClick = () => {
+    listItemContainer.current.classList.remove('active_list');
+    if (restaurantListItem === restaurant) {
+      listItemContainer.current.classList.add('active_list');
     }
   };
 
-  rankCssEffect() {
-    if (this.props.idx === 0) {
+  const rankCssEffect = () => {
+    if (idx === 0) {
       return 'first';
-    } else if (this.props.idx === 1) {
+    } else if (idx === 1) {
       return 'second';
-    } else if (this.props.idx === this.props.lastIdx) {
+    } else if (idx === lastIdx) {
       return 'hell';
     }
     return 'defaultBack';
+  };
 
-  }
-
-  componentDidUpdate() {
-    this.isActive();
-  }
-
-  rankImage() {
-    if (this.props.idx === 0) {
+  const rankImage = () => {
+    if (idx === 0) {
       return '/img/first.jpeg';
-    } if (this.props.idx === 1) {
+    } if (idx === 1) {
       return '/img/second.png';
-    } else if (this.props.idx === this.props.lastIdx) {
+    } else if (idx === lastIdx) {
       return '/img/hell.png';
     } else {
       return '/img/defaultRank.jpg';
     }
-  }
+  };
 
-  render() {
-    return (
-      <li>
-        <div ref={this.listItem} id={'listItem_'+this.props.idx} className={"card horizontal con " + this.rankCssEffect()} onClick={() =>{this.props.dispatch({type: 'setRestaurant', restaurant: this.props.restaurant})}} style={{margin: 0, height: 100, cursor: 'pointer'}}>
-          <div className="card-image" style={{width: '30%'}}>
-            <img style={{width:'100%',height:'100%', backgroundColor: 'white'}} src={this.rankImage()}/>
-          </div>
-          <div className="card-stacked">
-            <div className="card-content">
-              <h6 style={{textAlign: 'center', marginTop: 0, fontWeight: 'bold'}}>{this.props.restaurant.name}</h6>
-              <div style={{textAlign: 'center'}}><span style={{marginRight: '10px'}}>평점 : {this.props.restaurant.ratingsAverage}</span><span >리뷰 : {this.props.restaurant.reviewCount}</span></div>
-            </div>
+  return (
+    <li>
+      <div ref={listItemContainer} id={'listItem_'+ idx} className={"card horizontal con listitem_container " + rankCssEffect()} onClick={() =>{dispatch({type: 'setRestaurant', restaurant: restaurantListItem});}} >
+
+        <div className="card-image listitem_card_container">
+          <img alt='' className="listitem_img" src={rankImage()}/>
+        </div>
+        <div className="card-stacked">
+          <div className="card-content">
+            <h6 className="card_header">{restaurantListItem.name}</h6>
+            <div className="card_foot"><span className="listitem_ratingpoint">평점 : {restaurantListItem.ratingsAverage}</span><span >리뷰 : {restaurantListItem.reviewCount}</span></div>
           </div>
         </div>
-      </li>
-    );
-  }
-}
+      </div>
+    </li>
+  );
+};
 
 export default ListItem;

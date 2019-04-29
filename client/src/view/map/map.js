@@ -1,79 +1,62 @@
-import React, { Component, useRef } from 'react';
+import React, { Component, useRef, useEffect } from 'react';
 import './map.css';
+import codestatesImg from '../../img/codestates.ico';
+import markerImg from '../../img/marker.png';
 
-const _Map = (props) => {
-  const DaumMap = window.daum.maps;
+let map, infoWindow, line, markers;
+const Map = (props) => {
   const mapContainer = useRef(null);
+  const { restaurants, restaurant, dispatch } = props;
+  const centerCoordinate = new window.daum.maps.LatLng(37.545486, 127.051632);
 
-  const setMap = (centerLat, centerLng) => {
-    const centerCoordinate = new DaumMap.LatLng(centerLat, centerLng);
+  useEffect(() => {
+    changeRestaurantEventHandler();
+    map && map.panTo(getRestaurantCoordinate());
+  }, [restaurant]);
+
+  useEffect(() => {
+    initailMarkers();
+    map || initMap();
+  }, [restaurants]);
+
+  const initMap = () => {
+    map = setMap(centerCoordinate);
+    const centerMarkerImg = makeMarkerImage(codestatesImg);
+    const centerMarker = new window.daum.maps.Marker({position: centerCoordinate, image: centerMarkerImg, zIndex: 3});
+    initailMarkers();
+    centerMarker.setMap(map);
+  };
+
+  const setMap = (centerCoordinate) => {
     const options = {
       center: centerCoordinate,
       level: 4
     };
 
-    return DaumMap.Map(mapContainer.current, options);
+    return new window.daum.maps.Map(mapContainer.current, options);
+  };
+
+  const changeRestaurantEventHandler = () => {
+    infoWindow && infoWindow.setMap(null);
+    line && line.setMap(null);
+
+    if (restaurant) {
+      makeLine();
+      makeInfoWindow();
+    }
   };
 
   const makeMarkerImage = (imgSrc) => {
-    const imageSize = new DaumMap.size(40, 40);
-    return new DaumMap.MarkerImage(imgSrc, imageSize);
+    const imageSize = new window.daum.maps.Size(40, 40);
+    return new window.daum.maps.MarkerImage(imgSrc, imageSize);
   };
 
-  return (
-    <div className="col s9" style={{backgroundColor: "grey", paddingLeft:'5px', paddingRight:'5px'}}>
-      <div ref={mapContainer} id="map" style={{width: '100%', height: '100vh'}} />
-    </div>
-  )
+  const initailMarkers = () => {
+    Array.isArray(markers) && markers.forEach(marker => marker.setMap(null));
+    markers = [];
 
-
-};
-
-
-class Map extends Component {
-  makeMap = function() {
-    let markerImage = this.makeMarkerImage('codestates.ico', true);
-
-    let centerPosition = new window.daum.maps.LatLng(37.545486, 127.051632);// 패스트 파이브 성수점 좌표
-    const container = document.getElementById('map');
-    let options = {
-      center: centerPosition,
-      level: 4
-    };
-
-    this.map = new window.daum.maps.Map(container, options);
-
-    const centerMarker = new window.daum.maps.Marker({position: centerPosition, image: markerImage, zIndex: 3});
-    centerMarker.setMap(this.map);
-  };
-
-  markers = [];
-  openedWindow;
-  drawedLine;
-
-  makeMarkerImage = function(imageName, isCenter) {
-    let imageSrc = window.location.origin + '/img/' + imageName;
-    let imageSize;
-    if (isCenter) {
-      imageSize  = new window.daum.maps.Size(40, 40); // 마커이미지의 크기
-    } else {
-      imageSize = new window.daum.maps.Size(40, 40); // 마커이미지의 크기
-    }
-
-
-
-    return new window.daum.maps.MarkerImage(imageSrc, imageSize);
-  };
-
-  makeMarkers = function() {
-    const that = this;
-    that.markers.forEach((marker, idx) => {
-      marker.setMap(null);
-    });
-    that.markers = [];
-
-    const markerImage = this.makeMarkerImage('marker.png', false);
-    this.props.restaurants.forEach((restaurant, idx) => {
+    const markerImage = makeMarkerImage(markerImg);
+    markers = restaurants.map(restaurant => {
       const markerPosition = new window.daum.maps.LatLng(restaurant.map.latitude, restaurant.map.longitude);
       let marker =new window.daum.maps.Marker({
         position: markerPosition,
@@ -82,104 +65,56 @@ class Map extends Component {
         zIndex: 1
       });
 
-      that.markers.push(marker);
-
       window.daum.maps.event.addListener(marker, 'click', function() {
-        that.props.setSelectedId(that.markers.indexOf(marker));
-        that.clickEventHandling(that.map, marker);
+        dispatch({type: 'setRestaurant', restaurant});
       });
 
-      marker.setMap(this.map);
+      marker.setMap(map);
 
+      return marker;
     })
-
   };
 
-  makeLine = function(marker) {
-    const codestatesLating = new window.daum.maps.LatLng(37.545486, 127.051632);
-    const selectedMarkerLating = marker.getPosition();
+  const makeLine = () => {
+    const selectedMarkerCoordinate = getRestaurantCoordinate();
 
-    return new window.daum.maps.Polyline({
-      path: [codestatesLating, selectedMarkerLating],
+    line = new window.daum.maps.Polyline({
+      path: [centerCoordinate, selectedMarkerCoordinate],
       strokeWeight: 5,
       strokeColor: 'red',
       strokeOpacity: 0.7,
       strokeStyle: 'solid'
     });
+
+    line.setMap(map);
   };
 
-  makeInfoWindow = function(position, content) {
-    return new window.daum.maps.CustomOverlay({
+  const makeInfoWindow = () => {
+    const selectedMarkerCoordinate = getRestaurantCoordinate();
+    const content = `<div class="dotOverlay"> 직선 거리 <span class="number">${Math.floor(line.getLength())}</span>m</div>`;
+
+    infoWindow = new window.daum.maps.CustomOverlay({
       content: content,
-      position: position,
+      position: selectedMarkerCoordinate,
       yAnchor: 2.3,
       zIndex: 2
     });
+
+    infoWindow.setMap(map);
   };
 
-  makeMap = function() {
-    let markerImage = this.makeMarkerImage('codestates.ico', true);
+  const getRestaurantCoordinate = () => {
+    if (!restaurant) return centerCoordinate;
 
-    let centerPosition = new window.daum.maps.LatLng(37.545486, 127.051632);// 패스트 파이브 성수점 좌표
-    const container = document.getElementById('map');
-    let options = {
-      center: centerPosition,
-      level: 4
-    };
-
-    this.map = new window.daum.maps.Map(container, options);
-
-    const centerMarker = new window.daum.maps.Marker({position: centerPosition, image: markerImage, zIndex: 3});
-    centerMarker.setMap(this.map);
+    const { latitude, longitude } = restaurant.map;
+    return new window.daum.maps.LatLng(latitude, longitude);
   };
 
-  clickEventHandling = (map, marker) => {
-    this.initailizeMap();
-    let lating = marker.getPosition();
-
-    this.drawedLine = this.makeLine(marker);
-    this.drawedLine.setMap(map);
-
-    let content = `<div class="dotOverlay"> 직선 거리 <span class="number">${Math.floor(this.drawedLine.getLength())}</span>m</div>`;
-
-
-    this.openedWindow = this.makeInfoWindow(lating, content);
-    this.openedWindow.setMap(map);
-
-    map.panTo(lating);
-  };
-
-  componentDidMount() {
-    this.makeMap();
-  }
-  
-  initailizeMap() {
-    if (this.openedWindow) {
-      this.openedWindow.setMap(null);
-    }
-    if (this.drawedLine) {
-      this.drawedLine.setMap(null);
-    }
-  }
-
-  componentDidUpdate() {
-    this.initailizeMap();
-    this.makeMarkers();
-    if (this.props.selectedId) {
-      this.clickEventHandling(this.map, this.markers[this.props.selectedId]);
-    } else {
-      let centerPosition = new window.daum.maps.LatLng(37.545486, 127.051632);
-      this.map.panTo(centerPosition);
-    }
-  }
-
-  render() {
-    return (
-      <div className="col s9" style={{backgroundColor: "grey", paddingLeft:'5px', paddingRight:'5px'}}>
-        <div id="map" style={{width: '100%', height: '100vh'}} />
-      </div>
-    )
-  }
-}
+  return (
+    <div className="col s9" style={{backgroundColor: "grey", paddingLeft:'5px', paddingRight:'5px'}}>
+      <div ref={mapContainer} id="map" style={{width: '100%', height: '100vh'}} />
+    </div>
+  )
+};
 
 export default Map;

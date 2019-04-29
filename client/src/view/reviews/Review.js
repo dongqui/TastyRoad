@@ -7,7 +7,7 @@ const Review = function(props) {
   const { picture, username } = props.review.user;
   const starsCount = () => {
     const count = Math.round(rating);
-    let startArr = [];
+    const startArr = [];
     for (let i = 0; i < count; i++) {
       startArr.push(<i id='review_star' className="material-icons">grade</i>);
     }

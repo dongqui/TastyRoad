@@ -3,7 +3,7 @@ import React from 'react';
 import './Modal.css';
 
 const modal = (props) => {
-    const { modalOpen, close, children, header } = props;
+    const { modalOpen, children } = props;
     return (
         <div className="modal-wrapper"
              style={{

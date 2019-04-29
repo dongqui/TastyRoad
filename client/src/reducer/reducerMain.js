@@ -5,7 +5,8 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-    switch (action.type) {
+    const { type, restaurants, restaurant} = action;
+    switch (type) {
         case 'loading':
             return {
                 ...state,
@@ -14,15 +15,14 @@ const reducer = (state, action) => {
         case 'setRestaurants':
             return {
                 ...state,
-                restaurants: action.restaurants,
+                restaurants,
                 restaurant: null,
                 loading: false,
             };
         case 'setRestaurant':
-            console.log(action.restaurant);
             return {
                 ...state,
-                restaurant: action.restaurant
+                restaurant
             };
         default:
             throw new Error();

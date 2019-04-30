@@ -9,9 +9,13 @@
 }
 
 .listitem_img {
-    width: 150px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     background-color: white;
+}
+
+.listitem_card_container {
+    width: 120px;
 }
 
 .card_header {

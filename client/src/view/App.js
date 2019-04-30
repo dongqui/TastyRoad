@@ -21,13 +21,12 @@ class App extends React.Component {
     return (
       <Router>
         <switch>
-            <Main/>
-          {/*<Route path='/' exact render={() => (*/}
-            {/*this.state.user ? (<Main user={this.state.user}/> ) : (<Redirect to='/login' />)*/}
-          {/*)} />*/}
-          {/*<Route path='/login' exact render={() => (*/}
-            {/*this.state.user ? (<Redirect to='/' />) : (<Login />)*/}
-          {/*)} />*/}
+          <Route path='/' exact render={() => (
+            this.state.user ? (<Main user={this.state.user}/> ) : (<Redirect to='/login' />)
+          )} />
+          <Route path='/login' exact render={() => (
+            this.state.user ? (<Redirect to='/' />) : (<Login />)
+          )} />
         </switch>
       </Router>
     )

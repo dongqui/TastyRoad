@@ -37,3 +37,15 @@
     display: inline-block;
     width: 73%;
 }
+
+#review_list_bot {
+    text-align: center;
+    width: 100%;
+    background-color: white;
+    color: gray;
+    padding: 10px;
+}
+
+#review_list_bot :hover {
+    cursor: pointer;
+}

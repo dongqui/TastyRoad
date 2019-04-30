@@ -43,7 +43,7 @@ const ListItem = (props) => {
     <li>
       <div ref={listItemContainer} id={'listItem_'+ idx} className={"card horizontal con listitem_container " + rankCssEffect()} onClick={() =>{dispatch({type: 'setRestaurant', restaurant: restaurantListItem});}} >
 
-        <div className="card-image listitem_card_container">
+        <div className="listitem_card_container">
           <img alt='' className="listitem_img" src={rankImage()}/>
         </div>
         <div className="card-stacked">

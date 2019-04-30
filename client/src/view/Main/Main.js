@@ -11,7 +11,7 @@ import { reducer, initialState } from '../../reducer/reducerMain';
 
 const Main = (props) => {
   const { user } = props;
-  const [{ restaurants, restaurant, loading }, dispatch] = useReducer(reducer, initialState);
+  const [{ restaurants, restaurant, loading, reviews }, dispatch] = useReducer(reducer, initialState);
 
   const getRestaurants = async () => {
     dispatch({type: 'loading'});
@@ -35,7 +35,7 @@ const Main = (props) => {
       <Nav setFilter={setFilter} user={user}/>
       <Map restaurants={restaurants} restaurant={restaurant} dispatch={dispatch}/>
       <List restaurants={restaurants} restaurant={restaurant} dispatch={dispatch}/>
-      { restaurant && <Reviews user={user} restaurant={restaurant}/>}
+      { restaurant && <Reviews reviews={reviews} user={user} restaurant={restaurant} dispatch={dispatch}/>}
       { restaurant && <DetailInfo restaurant={restaurant}/>}
     </div>
   )

@@ -9,20 +9,18 @@ import WriteReview from './WriteReview';
 
 
 const Reviews = (props) => {
-  const { user, restaurant } = props;
-  const [ reviews, setReviews ] = useState([]);
+  const { user, restaurant, reviews, dispatch } = props;
   const [ modalOpen, setModalOpen ] = useState(false);
   const reviewsContainerRef = useRef(null);
 
   useEffect(() => {
     isActive(reviewsContainerRef, 'active_reviews');
-    getReviews();
   }, [restaurant]);
 
-  const getReviews = async () => {
+  const getAllReviews = async () => {
     try {
       const reviews = await getReviewsRequest(restaurant._id);
-      setReviews(reviews);
+      dispatch({type: 'setReviews', reviews})
     } catch(e) {
       console.log(e);
     }
@@ -35,10 +33,20 @@ const Reviews = (props) => {
       return;
     }
     try {
-      const newReview = await addReviewReqeust(data);
-      setReviews([newReview, ...reviews]);
+      const reviews = await addReviewReqeust(data);
+      dispatch({type: 'setReviews', reviews})
     } catch(e) {
 
+    }
+  };
+
+  const renderMoreReivew = () => {
+    if (reviews.length < restaurant.reviewCount) {
+      return (
+        <li id="review_list_bot" onClick={getAllReviews}>
+          <span>더 보기</span>
+        </li>
+        )
     }
   };
 
@@ -54,6 +62,7 @@ const Reviews = (props) => {
             <span id='create_review_btn' onClick={() => setModalOpen(true)}><i className="material-icons">create</i></span>
           </li>
           { reviews.map(review => <Review key={review._id} review={review}/>) }
+          { renderMoreReivew() }
         </ul>
 
         <Modal modalOpen={modalOpen}>

@@ -21,8 +21,8 @@ const List = function(props) {
                   restaurant={restaurant}
                   idx={idx}
                   dispatch={dispatch}
-                  lastIdx={restaurants.length - 1}/>
-                  )
+                  lastIdx={restaurants.length - 1}
+              />)
           })
         }
       </ul>

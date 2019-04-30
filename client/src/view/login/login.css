@@ -1,22 +1,20 @@
-.loginCon {
-
+.login-container {
     width: 100%;
     height: 100vh;
     background-color: black;
     color: white;
     text-align: center;
     margin: 0;
-
 }
 
-.loginTitleCon {
+.login-title-container {
     position: relative;
     top: 10%;
     background-color: black;
     margin: 0;
 
 }
-.loginTitle {
+.login-title {
     font-family: 'Leckerli One', cursive;
     font-size: 7em;
 }
@@ -56,7 +54,7 @@
     animation: fadeIn 6.0s;
 }
 
-.loginSubtitle{
+.login-subtitle{
     position: relative;
     font-family: 'Leckerli One', cursive;
     left: 9%;
@@ -76,34 +74,47 @@
 }
 
 
-.slackButtonCon {
-    font-family: 'Acme', sans-serif;
-    border-radius: 100px;
-    padding: 10px;
+.slack-btn-container {
     position: relative;
     top: 20%;
     margin:0 auto;
-    width: 24%;
-    height: 10%;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: left;
     animation: fadeIn 3s !important;
 }
 
-.slackButton h4 {
-    color: black;
-    font-size: 2em;
-    font-weight: bold;
-    letter-spacing: -1px;
-    padding: 0 20px 0 0;
+.slack-btn-container :hover {
+    cursor: pointer;
 }
 
-.slackButtonCon img {
+.guest-btn-container {
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 22%;
+    width: 344px;
+    background-color: white;
+    margin:0 auto;
+    animation: fadeIn 3s !important;
+    text-align: left;
+    height: 80px;
+    padding: 10px;
+    color: black;
+}
+
+.guest-btn-container :hover {
+    cursor: pointer;
+}
+
+#guest-login-img {
+    width: 55px;
     display: inline-block;
-    padding: 0;
-    margin: 0;
+}
+
+#guest-login-text {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
 }

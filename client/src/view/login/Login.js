@@ -1,40 +1,34 @@
 import React from "react";
 import './login.css'
 
-class Login extends React.Component {
-
-
-
-
-  render() {
-
-    return (
-      <div className="loginCon" >
-        <div className="loginTitleCon">
-          <div className="loginTitle">
-            <span className="letter">T</span>
-            <span className="letter">a</span>
-            <span className="letter">s</span>
-            <span className="letter">t</span>
-            <span className="letter">y</span>
-            <span className="letter"> </span>
-            <span className="letter">R</span>
-            <span className="letter">o</span>
-            <span className="letter">a</span>
-            <span className="letter">d</span>
-          </div>
-          <p className="loginSubtitle">for codestates</p>
+const Login = () => {
+  return (
+    <div className="login-container" >
+      <div className="login-title-container">
+        <div className="login-title">
+          <span className="letter">T</span>
+          <span className="letter">a</span>
+          <span className="letter">s</span>
+          <span className="letter">t</span>
+          <span className="letter">y</span>
+          <span className="letter"> </span>
+          <span className="letter">R</span>
+          <span className="letter">o</span>
+          <span className="letter">a</span>
+          <span className="letter">d</span>
         </div>
-        <div className='slackButtonCon' style={{cursor: 'pointer'}} onClick={function(){window.location='https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.408791625351'}}>
-          <div style={{width: '15%', height: '88%', backgroundColor: 'white'}}>
-            <img style={{width: '100%', height: '100%'}} src="https://regmedia.co.uk/2016/01/12/slack.jpg?x=1200&y=794"/>
-          </div>
-          <div className='slackButton'>
-            <h4 >Sign in with Slack</h4>
-          </div>
-        </div>
+        <p className="login-subtitle">for codestates</p>
       </div>
-    )
-  }
-}
+      <div className='slack-btn-container' onClick={() => {window.location='https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.408791625351'}}>
+        <img alt='slack_login' src="/img/slack_btn.png"/>
+      </div>
+
+      <div className="guest-btn-container">
+        <img alt='guest_login' id="guest-login-img" src="/img/door.png"/>
+        <span id="guest-login-text">Guest Login</span>
+      </div>
+    </div>
+  )
+};
+
 export default Login;

@@ -1,8 +1,8 @@
 import { RadioGroup } from "react-materialize";
 import React, { useState, useRef } from "react";
 import Rating from 'react-rating';
-import './PostRestaurant.css';
-import SearchListItem from './SearchListItem';
+import './postRestaurant.css';
+import SearchListItem from './searchListItem';
 import emptyStar from "../reviews/img/star-empty.png";
 import fullStart from "../reviews/img/star-full.png";
 import useInput from "../../hooks/useInput";

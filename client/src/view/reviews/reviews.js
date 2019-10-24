@@ -1,10 +1,10 @@
 import React, {useRef, useEffect, useState } from 'react';
-import Review from './Review';
+import Review from './review';
 import './reviews.css';
 import isActive from '../../helper/toggleClass';
 import { addReviewReqeust, getReviewsRequest } from '../../helper/axiosRequest'
-import Modal from '../modal/Modal';
-import WriteReview from './WriteReview';
+import Modal from '../modal/modal';
+import WriteReview from './writeReview';
 
 
 

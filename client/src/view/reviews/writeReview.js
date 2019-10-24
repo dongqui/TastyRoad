@@ -3,7 +3,7 @@ import Rating from 'react-rating';
 import emptyStar from './img/star-empty.png';
 import fullStart from './img/star-full.png';
 import useInput from "../../hooks/useInput";
-import './WriteReview.css';
+import './writeReview.css';
 
 const WriteReview = function(props) {
     const { addReview, close, header } = props;

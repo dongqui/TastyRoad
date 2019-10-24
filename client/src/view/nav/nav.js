@@ -2,11 +2,11 @@ import React, { Component, useState } from 'react';
 import { Button, Row, Input } from 'react-materialize';
 import Rating from 'react-rating';
 import axios from 'axios';
-import List from './SearchListItem.js'
+import List from './searchListItem.js'
 import './nav.css'
 import NavFilter from './navFilter';
-import Modal from '../modal/Modal';
-import PostRestaurant from './PostRestaurant';
+import Modal from '../modal/modal';
+import PostRestaurant from './postRestaurant';
 
 const Nav = (props) => {
   const filterArr = ['ALL', 'korean', 'japanese', 'chinese', 'western', 'etc'];

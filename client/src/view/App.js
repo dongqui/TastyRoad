@@ -1,21 +1,31 @@
-import Login from './login/Login';
-import React from 'react'
+import Login from './login/login';
+import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Redirect} from "react-router-dom";
 import Route from "react-router-dom/Route";
-import Main from "./Main/Main";
+import Main from "./main/main";
 import axios from "axios/index";
 
+const App = () => {
+  const [ user, setUser ] = useState(null);
+  useEffect(() => {
+    const checkLogin = async () => {
+      const result = await axios.get('http://localhost:3001/auth/slack');
+
+    };
+
+      .then(result => {
+        this.setState({user: result.data})
+      })
+      .catch(err => console.log('request user err', err))
+  }, []);
+};
 class App extends React.Component {
 
   state = {};
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:3001/auth/slack')
-  //     .then(result => {
-  //       this.setState({user: result.data})
-  //     })
-  //     .catch(err => console.log('request user err', err))
-  // }
+  componentDidMount() {
+
+  }
 
   render() {
     return (

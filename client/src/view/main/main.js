@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import Nav from '../nav/nav.js';
 import Map from '../map/map.js';
 import List from '../list/list';
-import Reviews from '../reviews/Reviews';
+import Reviews from '../reviews/reviews';
 import DetailInfo from "../detailInfo/detailInfo";
 import Loading from '../loading/loading';
 import { getRestaurantsRequest, getFilteredRestaurantsRequest } from '../../helper/axiosRequest';

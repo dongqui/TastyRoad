@@ -3,7 +3,16 @@ const axios = require('axios');
 const keys = require('../config').slack;
 const User = require('../models/user');
 
-//redirect to slack to get authorization 
+router.get('/guest', (req, res) => {
+  const user = {
+    isLogin: false
+  };
+  req.session.regenerate(() => {
+    req.session.user = user;
+    res.redirect('/');
+  })
+});
+
 router.get('/slack/redirect', async (req, res) => {
     if (!req.query.code) {
         console.log('come back with fckin code!');
@@ -23,7 +32,8 @@ router.get('/slack/redirect', async (req, res) => {
         user = await new User({
             username: userInfo.name,
             userId: userInfo.id,
-            picture: userInfo.image_48
+            picture: userInfo.image_48,
+            isLogin: true
         }).save();
     }
 
@@ -31,10 +41,9 @@ router.get('/slack/redirect', async (req, res) => {
         req.session.user = user;
         res.redirect('/');
     })
-
 });
 
-router.get('/slack', (req, res) => {
+router.get('/', (req, res) => {
     res.send(req.session.user);
 });
 

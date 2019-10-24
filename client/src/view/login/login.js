@@ -19,7 +19,9 @@ const Login = () => {
         </div>
         <p className="login-subtitle">for codestates</p>
       </div>
-      <div className='slack-btn-container' onClick={() => {window.location='https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.408791625351'}}>
+      <div className='slack-btn-container'
+           onClick={() => {window.location='' +
+             'https://slack.com/oauth/authorize?scope=identity.basic identity.avatar&client_id=383778302023.408791625351'}}>
         <img alt='slack_login' src="/img/slack_btn.png"/>
       </div>
 

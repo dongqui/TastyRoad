@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchListItem.css';
+import './searchListItem.css';
 
 const SearchListItem = (props) => {
     const { place_name, address_name } = props.data;

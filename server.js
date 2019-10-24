@@ -24,11 +24,6 @@ app.use('/auth', authRoutes);
 app.use('/restaurant', restaurantRoutes);
 app.use('/review', reviewRoutes);
 
-//handling all requests
-// app.get('*', (req, res) => {
-//     res.sendFile(__dirname + '/client/im07-tasty-road-client/build/index.html')
-//    });
-
 app.listen(port, () => {
    console.log(`Express is running on port ${port}`)
 });

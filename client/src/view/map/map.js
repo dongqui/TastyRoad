@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './map.css';
 import codestatesImg from '../../img/codestates.ico';
 import markerImg from '../../img/marker.png';
@@ -23,7 +23,7 @@ const Map = (props) => {
     map = setMap(centerCoordinate);
     const centerMarkerImg = makeMarkerImage(codestatesImg);
     const centerMarker = new window.daum.maps.Marker({position: centerCoordinate, image: centerMarkerImg, zIndex: 3});
-    initailMarkers();
+    initialMarkers();
     centerMarker.setMap(map);
   };
 
@@ -51,7 +51,7 @@ const Map = (props) => {
     return new window.daum.maps.MarkerImage(imgSrc, imageSize);
   };
 
-  const initailMarkers = () => {
+  const initialMarkers = () => {
     Array.isArray(markers) && markers.forEach(marker => marker.setMap(null));
     markers = [];
 

@@ -6,8 +6,6 @@ import { addReviewReqeust, getReviewsRequest } from '../../helper/axiosRequest'
 import Modal from '../modal/modal';
 import WriteReview from './writeReview';
 
-
-
 const Reviews = (props) => {
   const { user, restaurant, reviews, dispatch } = props;
   const [ modalOpen, setModalOpen ] = useState(false);

@@ -9,7 +9,7 @@ router.get('/guest', (req, res) => {
   };
   req.session.regenerate(() => {
     req.session.user = user;
-    res.redirect('/');
+    res.send(user);
   })
 });
 

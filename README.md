@@ -12,6 +12,7 @@ https://tastyroad.herokuapp.com/
 * 인증 
   * session 기반에서 JWT로 변경
   * Guest, Email 가입 추가
+  * auth middleware
 * 기능
   * 코드스테이츠뿐만 아니라 다른 집단, 위치도 가능하도록 확장
   * 페이지네이션

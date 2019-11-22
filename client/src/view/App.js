@@ -25,7 +25,7 @@ const App = () => {
           user ? (<Main user={user}/> ) : (<Redirect to='/login' />)
         )} />
         <Route path='/login' exact render={() => (
-          user ? (<Redirect to='/' />) : (<Login />)
+          user ? (<Redirect to='/' />) : (<Login setUser={setUser}/>)
         )} />
       </switch>
     </Router>

@@ -2,7 +2,11 @@ import React from "react";
 import './login.css'
 import { guestAuthRequest } from '../../helper/axiosRequest'
 
-const Login = () => {
+const Login = ({ setUser }) => {
+  const guestAuth = async () => {
+    const user = await guestAuthRequest;
+    setUser(user);
+  };
   return (
     <div className="login-container" >
       <div className="login-title-container">
@@ -26,7 +30,7 @@ const Login = () => {
         <img alt='slack_login' src="/img/slack_btn.png"/>
       </div>
 
-      <div className="guest-btn-container" onClick={guestAuthRequest}>
+      <div className="guest-btn-container" onClick={guestAuth}>
         <img alt='guest_login' id="guest-login-img" src="/img/door.png"/>
         <span id="guest-login-text">Guest Login</span>
       </div>

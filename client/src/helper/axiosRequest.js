@@ -10,7 +10,8 @@ export const authCheck = async () => {
 };
 
 export const guestAuthRequest = async () => {
-  await axios.get(`${serverAddress}/auth/guest`);
+  const response = await axios.get(`${serverAddress}/auth/guest`);
+  return response.data;
 };
 
 // ------- Review --------

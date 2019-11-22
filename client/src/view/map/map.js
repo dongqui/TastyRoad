@@ -15,7 +15,7 @@ const Map = (props) => {
   }, [restaurant]);
 
   useEffect(() => {
-    initailMarkers();
+    initialMarkers();
     map || initMap();
   }, [restaurants]);
 

@@ -9,8 +9,12 @@ export const authCheck = async () => {
   return response.data;
 };
 
+export const guestAuthRequest = async () => {
+  await axios.get(`${serverAddress}/auth/guest`);
+};
+
 // ------- Review --------
-export const addReviewReqeust = async (data) => {
+export const addReviewRequest = async (data) => {
   const response = await axios.post(`${serverAddress}/api/addReview`, data);
   return response.data;
 };

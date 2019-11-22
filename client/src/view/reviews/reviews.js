@@ -2,7 +2,7 @@ import React, {useRef, useEffect, useState } from 'react';
 import Review from './review';
 import './reviews.css';
 import isActive from '../../helper/toggleClass';
-import { addReviewReqeust, getReviewsRequest } from '../../helper/axiosRequest'
+import { addReviewRequest, getReviewsRequest } from '../../helper/axiosRequest'
 import Modal from '../modal/modal';
 import WriteReview from './writeReview';
 
@@ -31,14 +31,14 @@ const Reviews = (props) => {
       return;
     }
     try {
-      const reviews = await addReviewReqeust(data);
+      const reviews = await addReviewRequest(data);
       dispatch({type: 'setReviews', reviews})
     } catch(e) {
 
     }
   };
 
-  const renderMoreReivew = () => {
+  const renderMoreReview = () => {
     if (reviews.length < restaurant.reviewCount) {
       return (
         <li id="review_list_bot" onClick={getAllReviews}>
@@ -60,7 +60,7 @@ const Reviews = (props) => {
             <span id='create_review_btn' onClick={() => setModalOpen(true)}><i className="material-icons">create</i></span>
           </li>
           { reviews.map(review => <Review key={review._id} review={review}/>) }
-          { renderMoreReivew() }
+          { renderMoreReview() }
         </ul>
 
         <Modal modalOpen={modalOpen}>

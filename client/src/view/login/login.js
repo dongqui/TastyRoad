@@ -1,5 +1,6 @@
 import React from "react";
 import './login.css'
+import { guestAuthRequest } from '../../helper/axiosRequest'
 
 const Login = () => {
   return (
@@ -25,7 +26,7 @@ const Login = () => {
         <img alt='slack_login' src="/img/slack_btn.png"/>
       </div>
 
-      <div className="guest-btn-container">
+      <div className="guest-btn-container" onClick={guestAuthRequest}>
         <img alt='guest_login' id="guest-login-img" src="/img/door.png"/>
         <span id="guest-login-text">Guest Login</span>
       </div>

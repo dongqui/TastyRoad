@@ -9,8 +9,10 @@ const authRoutes = require('./routes/authHandler');
 const reviewRoutes = require('./routes/reviewHandler');
 const cors = require('cors');
 const session = require('express-session');
+const logger = require('morgan');
 
 app.use(cors());
+app.use(logger());
 app.use(express.static(__dirname + '/client/build'));
 app.use(bodyParser.json());
 app.use(require('body-parser'). urlencoded({ extended: true}));

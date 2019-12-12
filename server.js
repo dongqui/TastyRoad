@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const config = require('./config') || require('./envConfig');
+const config = process.env.NODE_ENV === 'development' ? require('./config') || require('./envConfig');
 const port = process.env.PORT || 3000;
 const app = express();
 const restaurantRoutes = require('./routes/restaurantHandler');

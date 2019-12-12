@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://localhost:3000';
+const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://tastyroad.herokuapp.com';
 
 
 // ------- Auth --------

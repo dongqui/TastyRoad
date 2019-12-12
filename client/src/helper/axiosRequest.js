@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : '';
+const serverAddress = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://localhost:3000';
 
 
 // ------- Auth --------

@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const config = require('./config');
-const port = process.env.PORT || 3001;
+const config = require('./config') || require('./envConfig');
+const port = process.env.PORT || 3000;
 const app = express();
 const restaurantRoutes = require('./routes/restaurantHandler');
 const authRoutes = require('./routes/authHandler');
@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/client/build'));
 app.use(bodyParser.json());
 app.use(require('body-parser'). urlencoded({ extended: true}));
 app.use(session({
-    secret: 'i am secret',
+    secret: config.session,
     resave: true,
     saveUninitialized: false
 }));

@@ -52,19 +52,33 @@ const Reviews = (props) => {
     return Object.values(data).every(item => !!item);
   };
 
+  const onClickModalClose = () => {
+    setModalOpen(false)
+  };
+
+  const onClickModalOpenTemp = () => {
+    if (user.isLogin) {
+      setModalOpen(true)
+    }
+    alert(`
+    -임시 알림-
+    당신은 Guest! Login 해야해요!
+    `)
+  };
+
   return (
       <div>
         <ul ref={reviewsContainerRef} id="reviews_container" className="collection">
           <li className="collection-item" id="review-list-top">
             <span id="review-list-title">{restaurant.name}</span>
-            <span id='create_review_btn' onClick={() => setModalOpen(true)}><i className="material-icons">create</i></span>
+            <span id='create_review_btn' onClick={onClickModalOpenTemp}><i className="material-icons">create</i></span>
           </li>
           { reviews.map(review => <Review key={review._id} review={review}/>) }
           { renderMoreReview() }
         </ul>
 
         <Modal modalOpen={modalOpen}>
-          <WriteReview addReview={addReview} close={() => setModalOpen(false)} header={restaurant.name} />
+          <WriteReview addReview={addReview} close={onClickModalClose} header={restaurant.name} />
         </Modal>
       </div>
   );

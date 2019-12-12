@@ -1,7 +1,7 @@
 {
-  "name": "im07-tasty-road-server",
+  "name": "TastyRoad",
   "version": "1.0.0",
-  "description": "tasty road in 성수",
+  "description": "tastyroad",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codestates/im07-tasty-road-server.git"
+    "url": "git+https://github.com/dongqui/TastyRoad.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/codestates/im07-tasty-road-server/issues"
+    "url": "https://github.com/dongqui/TastyRoad/issues"
   },
-  "homepage": "https://github.com/codestates/im07-tasty-road-server#readme",
+  "homepage": "https://github.com/dongqui/TastyRoad#readme",
   "dependencies": {
     "axios": "^0.18.1",
     "bluebird": "^3.5.1",

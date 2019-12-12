@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const axios = require('axios');
-const keys = require('../config').slack;
+const keys = process.env.NODE_ENV === 'production' ? require('./envConfig').slack : require('./config').slack;
 const User = require('../models/user');
 
 router.get('/guest', (req, res) => {

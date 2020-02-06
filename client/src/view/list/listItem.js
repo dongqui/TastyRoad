@@ -6,15 +6,14 @@ const ListItem = (props) => {
   const { restaurantListItem, restaurant, idx, lastIdx, dispatch } = props;
 
   useEffect(() => {
+    const activeClassOnClick = () => {
+      listItemContainer.current.classList.remove('active_list');
+      if (restaurantListItem === restaurant) {
+        listItemContainer.current.classList.add('active_list');
+      }
+    };
     activeClassOnClick();
   }, [restaurant]);
-
-  const activeClassOnClick = () => {
-    listItemContainer.current.classList.remove('active_list');
-    if (restaurantListItem === restaurant) {
-      listItemContainer.current.classList.add('active_list');
-    }
-  };
 
   const rankCssEffect = () => {
     if (idx === 0) {

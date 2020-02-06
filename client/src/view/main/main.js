@@ -9,15 +9,8 @@ import { getRestaurantsRequest, getFilteredRestaurantsRequest } from '../../help
 import { reducer, initialState } from '../../reducer/reducerMain';
 
 
-const Main = (props) => {
-  const { user } = props;
+const Main = ({ user }) => {
   const [{ restaurants, restaurant, loading, reviews }, dispatch] = useReducer(reducer, initialState);
-
-  const getRestaurants = async () => {
-    dispatch({type: 'loading'});
-    const restaurants = await getRestaurantsRequest();
-    dispatch({type: 'setRestaurants', restaurants});
-  };
 
   const setFilter = (filter) => async () => {
     dispatch({type: 'loading'});
@@ -26,6 +19,11 @@ const Main = (props) => {
   };
 
   useEffect(() => {
+    const getRestaurants = async () => {
+      dispatch({type: 'loading'});
+      const restaurants = await getRestaurantsRequest();
+      dispatch({type: 'setRestaurants', restaurants});
+    };
     getRestaurants();
   }, []);
 

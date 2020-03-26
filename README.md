@@ -1,4 +1,4 @@
-https://tastyroad.herokuapp.com/
+https://tastyroad.herokuapp.com/  *헤로쿠 프리티어라 첫 로드가 느릴 수 있음
 # Tasty road
 
 * 식당을 검색, 등록하여 맛집 지도 위에 공유 및 평가.<br>

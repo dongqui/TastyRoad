@@ -10,7 +10,6 @@ https://tastyroad.herokuapp.com/  *헤로쿠 프리티어라 첫 로드가 느�
 
 ## Todo List
 * 인증 
-  * session 기반에서 JWT로 변경
   * Guest, Email 가입 추가
   * auth middleware
 * 기능

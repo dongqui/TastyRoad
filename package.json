@@ -36,6 +36,6 @@
     "passport-local": "^1.0.0",
     "passport-slack": "0.0.7",
     "request": "^2.87.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   }
 }
